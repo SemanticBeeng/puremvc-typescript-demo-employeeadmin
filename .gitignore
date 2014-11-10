@@ -3,7 +3,8 @@
 /.idea_modules
 /bin
 /logs
-project/project
-project/target
+/project/project
+/project/target
+/target
 app/assets/javascripts/**/*.js.map
 /tmp
