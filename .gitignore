@@ -1,7 +1,9 @@
 /.idea
 /*.iml
 /.idea_modules
-logs
+/bin
+/logs
 project/project
 project/target
 app/assets/javascripts/**/*.js.map
+/tmp
