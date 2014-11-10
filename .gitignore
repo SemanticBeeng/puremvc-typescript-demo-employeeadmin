@@ -1,5 +1,7 @@
 /.idea
-/*.sublime-project
-/*.sublime-workspace
-/build/user.properties
-debug.html
+/*.iml
+/.idea_modules
+logs
+project/project
+project/target
+app/assets/javascripts/**/*.js.map
