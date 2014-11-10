@@ -18,7 +18,7 @@ object ApplicationBuild extends Build {
   val main = play.Project(appName, appVersion, appDependencies)
     .settings(typescriptSettings: _*)
     .settings(
-      tsOptions ++= Seq("--sourcemap --module AMD")
+      tsOptions ++= Seq("--sourcemap ")
     )
 
 }

@@ -1,4 +1,4 @@
-///<reference path='../../lib/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
+///<reference path='../../typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
 
 ///<reference path='../abc/NotificationNames.ts'/>
 ///<reference path='../abc/ProxyNames.ts'/>
