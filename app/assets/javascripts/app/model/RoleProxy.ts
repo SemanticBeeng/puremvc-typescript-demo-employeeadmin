@@ -165,7 +165,7 @@ module EmployeeAdmin
 		getUserRoles( uname:string ):RoleEnum[]
 		{
 			var roles:RoleVO[] = this.getRoles();
-			var userRoles:RoleEnum[] = new RoleEnum[]();
+			var userRoles:RoleEnum[] = [];
 			for( var i:number=0; i<roles.length; i++ )
 			{ 
 				if( roles[i].uname === uname )

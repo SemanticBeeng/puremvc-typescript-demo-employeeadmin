@@ -18,6 +18,6 @@ module EmployeeAdmin
 		/**
 		 * The list of roles associated to the user.
 		 */
-		roles:RoleEnum[] = new RoleEnum[]();
+		roles:RoleEnum[] = [];
 	}
 }

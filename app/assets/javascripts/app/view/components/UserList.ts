@@ -1,5 +1,5 @@
 ///<reference path='../../../typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
-///<reference path='../../../typings/jquery/jquery-1.7.x-jqueryui-1.8.x.d.ts'/>
+///<reference path='../../../typings/jquery/jqueryui.d.ts'/>
 
 ///<reference path='../../model/vo/UserVO.ts'/>
 ///<reference path='UiComponent.ts'/>

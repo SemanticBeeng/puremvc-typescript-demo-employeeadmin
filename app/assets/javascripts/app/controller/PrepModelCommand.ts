@@ -43,7 +43,7 @@ module EmployeeAdmin
 		generateUsers():UserVO[]
 		{
 			var user:UserVO;
-			var users:UserVO[] = new UserVO[]();
+			var users:UserVO[] = [];
 
 			user = new UserVO();
 			user.uname = "lstooge";
@@ -84,7 +84,7 @@ module EmployeeAdmin
 		generateRoles():RoleVO[]
 		{
 			var role:RoleVO;
-			var roles:RoleVO[] = new RoleVO[]();
+			var roles:RoleVO[] = [];
 
 			role = new RoleVO();
 			role.uname = "lstooge";
