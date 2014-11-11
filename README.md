@@ -1,4 +1,4 @@
-## [PureMVC](http://puremvc.github.com/) [TypeScript](https://github.com/puremvc/puremvc-typescript-standard-framework/wiki) [Play Framework](https://playframework.com/) "Single Page Application" Demo: Employee Admin (jQuery)
+## [PureMVC](http://puremvc.github.com/) + [TypeScript](https://github.com/puremvc/puremvc-typescript-standard-framework/wiki) + [Play Framework](https://playframework.com/) "Single Page Application" Demo: Employee Admin (jQuery)
 
 Demo for creating a Single Page Application with PureMVC, Play Framework and TypeScript 
 

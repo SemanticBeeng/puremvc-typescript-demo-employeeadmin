@@ -27,48 +27,65 @@
  *
  * @url http://requirejs.org/
  */
-require.config
-(
-	{
+// `main.js` is the file that sbt-web will use as an entry point
+(function (requirejs) {
+    'use strict';
+
+    // -- RequireJS config --
+    requirejs.config({
+        // Packages = top-level folders; loads a contained file named 'main.js"
+        packages: ['common', 'dashboard', 'module1', 'module2'],
+
         baseUrl: 'assets/javascripts/',
 
-		paths:
-		{
-			puremvc: 'lib/puremvc/puremvc-typescript-standard-1.0',
-			EmployeeAdmin: 'app/bin/puremvc-typescript-employeeadmin-1.0'
-		},
+        paths: {
+            jQuery: 'lib/jquery/jquery-1.9.1',
 
-		shims:
-		{
-			"EmployeeAdmin":
-			{
-				deps: ["puremvc"]
-			}
+            puremvc: 'lib/puremvc/puremvc-typescript-standard-1.0',
 
-		}
-	}
-);
+            EmployeeAdmin: 'app/bin/puremvc-typescript-employeeadmin-1.0'
 
-/***************************************************************************************************
- * Start loading each module and its dependencies.
- */
-require
-(
+            //@todo 'jsRoutes': ['/jsroutes']
+        },
 
-	[
-		'EmployeeAdmin'
-	],
+        shims: {
+            'jQuery': {
+                exports: '$'
+            },
 
-	function
-	(
-		EmployeeAdmin
-	)
-	{
-		//Wait for the DOM to be ready before setting up the application.
-		jQuery( function ()
-		{
-			var applicationFacade/*ApplicationFacade*/ = EmployeeAdmin.ApplicationFacade.getInstance();
-			applicationFacade.startup( jQuery("body") );
-		})
-	}
-);
+            'jsRoutes': {
+                deps: [],
+                exports: 'jsRoutes'
+            },
+            // Hopefully this all will not be necessary but can be fetched from WebJars in the future
+            'puremvc': {
+                deps: ['jquery'],
+                exports: 'puremvc'
+            },
+
+            "app": {
+                deps: ["puremvc"]
+            }
+
+        }
+    });
+
+    requirejs.onError = function (err) {
+        console.log(err);
+    };
+
+    /***************************************************************************************************
+     * Start loading each module and its dependencies.
+     */
+    require(['EmployeeAdmin'],
+
+        function (EmployeeAdmin) {
+            //Wait for the DOM to be ready before setting up the application.
+            $(function () {
+                var applicationFacade = EmployeeAdmin.ApplicationFacade.getInstance();
+                applicationFacade.startup(jQuery("body"));
+            })
+        }
+    );
+
+})(requirejs);
