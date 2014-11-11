@@ -63,8 +63,8 @@
                 exports: 'puremvc'
             },
 
-            "app": {
-                deps: ["puremvc"]
+            'EmployeeAdmin': {
+                deps: ["puremvc", "common", 'dashboard', 'module1', 'module2']
             }
 
         }
@@ -79,10 +79,10 @@
      */
     require(['EmployeeAdmin'],
 
-        function (EmployeeAdmin) {
+        function (app) {
             //Wait for the DOM to be ready before setting up the application.
             $(function () {
-                var applicationFacade = EmployeeAdmin.ApplicationFacade.getInstance();
+                var applicationFacade = app.ApplicationFacade.getInstance();
                 applicationFacade.startup(jQuery("body"));
             })
         }
