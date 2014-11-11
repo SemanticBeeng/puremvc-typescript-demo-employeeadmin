@@ -11,7 +11,14 @@ object ApplicationBuild extends Build {
   val appVersion      = "1.0-SNAPSHOT"
 
   val appDependencies = Seq(
-    // Add your project dependencies here,
+//    filters,
+//    cache,
+    // WebJars (i.e. client-side) dependencies
+//    "org.webjars" % "requirejs" % "2.1.14-1",
+//    "org.webjars" % "underscorejs" % "1.6.0-3",
+//    "org.webjars" % "jquery" % "1.11.1",
+//    "org.webjars" % "bootstrap" % "3.1.1-2" exclude("org.webjars", "jquery"),
+//    "org.webjars" % "angularjs" % "1.2.18" exclude("org.webjars", "jquery")
   )
 
   val main = play.Project(appName, appVersion, appDependencies)

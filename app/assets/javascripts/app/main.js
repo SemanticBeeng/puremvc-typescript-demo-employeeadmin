@@ -65,6 +65,7 @@
 
             'EmployeeAdmin': {
                 deps: ["puremvc", "common", 'dashboard', 'module1', 'module2']
+                //exports: 'eaApp'
             }
 
         }
