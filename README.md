@@ -1,4 +1,4 @@
-## [PureMVC](http://puremvc.github.com/) [TypeScript](https://github.com/puremvc/puremvc-typescript-standard-framework/wiki) Demo: Employee Admin (jQuery)
+## [PureMVC](http://puremvc.github.com/) [TypeScript](https://github.com/puremvc/puremvc-typescript-standard-framework/wiki) [Play Framework](https://playframework.com/) Demo: Employee Admin (jQuery)
 
 Demo for creating a Single Page Application with PureMVC, Play Framework and TypeScript 
 
@@ -21,6 +21,7 @@ which is "require.js"-ed from main.js.
 
 $ sbt run
 
+Open http://localhost:9000/ 
 
 ## License
 * PureMVC TypeScript Demo - Employee Admin (jQuery) - Copyright © 2012 Frederic Saunier
