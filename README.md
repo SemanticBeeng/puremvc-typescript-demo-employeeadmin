@@ -1,47 +1,6 @@
 ## [PureMVC](http://puremvc.github.com/) [TypeScript](https://github.com/puremvc/puremvc-typescript-standard-framework/wiki) Demo: Employee Admin (jQuery)
-This demo illustrates techniques for performing routine client-side maintenance operations in a PureMVC-based TypeScript jQuery application.
 
-PureMVC framework and Employee Admin demo library files are loaded using Require.js. UI components
-are displayed using jQuery, jQuery UI and jQgrid.
-
-The demo is compiled as an AMD module using an Ant script that palliate TypeScript compiler
-issues building a single module using multiple TypeScript files. TypeScript will probably evolve on
-this point in a near future. The demo will be tested and updated on each new TypeScript compiler
-release. If it's not sufficiently up to date for you, please open an issue on Github or just send a
-pull request by your own, this will be more than welcome.
-
-* [Live Demo](http://www.tekool.net/blogfiles/puremvc-typescript/puremvc-typescript-demo-jquery-employeeadmin/)
-* [Discussion](http://www.tekool.net/blog/puremvc-typescript/)
-
-## Screenshot
-![PureMVC TypeScript Demo: Employee Admin (jQuery)](https://raw.github.com/tekool/puremvc-typescript-demo-employeeadmin/master/screenshot.png)
-
-## Status
-Development - [Version 1.0](https://github.com/PureMVC/puremvc-typescript-demo-jquery-employeeadmin/blob/master/VERSION)
-
-Will probably stay tagged as development while TypeScript language specification is not finalized,
-but remember that any TypeScript PureMVC project will output ready for production JavaScript.
-
-## Platforms / Technologies
-* [TypeScript](http://www.typescriptlang.org/)
-* [require.js](http://jqueryui.com/)
-* [jQuery](http://jquery.com/)
-* [jQuery UI](http://jqueryui.com/)
-* [jQgrid](http://www.trirand.com/blog/)
-* [YUI Compressor](http://developer.yahoo.com/yui/compressor/)
-* [Ant](http://ant.apache.org/)
-
-## Build
-
-To build the project you'll need to download and install :
-* [TypeScript compiler](http://www.typescriptlang.org/#Download)
-* [Ant](http://ant.apache.org/)
-* [JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html/) (Ant need a JDK not a JRE, also don't forget to change environment var JAVA_HOME to the JDK path).
-
-1. Rename the file [user.properties.sample](https://github.com/PureMVC/puremvc-typescript-standard-framework/blob/master/user.properties.sample) to **user.properties**
-2. Edit the file and replace **MY_TYPESCRIPT_COMPILER_PATH** bt the real TypeScript compiler full
-system path. e.g. on windows: <code>typescript.compiler.path = C:/Documents and Settings/{USER NAME HERE}/Application Data/npm/tsc.cmd
-3. Use your favorite editor to run Ant or simply type <code>ant puremvc-typescript-standard-framework/build
+Demo for creating a Single Page Application with PureMVC, Play Framework and TypeScript 
 
 ## License
 * PureMVC TypeScript Demo - Employee Admin (jQuery) - Copyright © 2012 Frederic Saunier
