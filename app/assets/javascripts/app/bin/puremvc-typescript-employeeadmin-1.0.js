@@ -909,7 +909,7 @@ if( typeof define === "function" )
                     });
                     this.newButton = this.userListPanel.find(".new-button").button();
                     this.deleteButton = this.userListPanel.find(".delete-button").button();
-                    this.deleteButton.button("disable");
+                    //this.deleteButton.button("disable");
                 };
                 /**
                  * Bind events to their listeners.
@@ -979,7 +979,7 @@ if( typeof define === "function" )
                 UserList.prototype.deSelect = function () {
                     this.userList.jqGrid("resetSelection");
                     this.selectedUser = null;
-                    this.deleteButton.button("disable");
+                    //this.deleteButton.button("disable");
                 };
                 /**
                  * List row selection event listener.

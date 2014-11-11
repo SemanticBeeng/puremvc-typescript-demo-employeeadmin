@@ -7,10 +7,22 @@
         <title>@title</title>
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        <script src="@routes.Assets.at("javascripts/lib/jquery/jquery-1.9.0.min.js")" type="text/javascript"></script>
-        <script src="@routes.Assets.at("javascripts/lib/jquery-ui/jquery-ui-1.9.1.custom.min.js")"
-        type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/lib/jquery/jquery-1.9.1.js")" type="text/javascript"></script>
+        @*<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>*@
+        <script>
+//       hack according to http://stackoverflow.com/questions/14923301/uncaught-typeerror-cannot-read-property-msie-of-undefined-jquery-tools
+            jQuery.browser = { } ;
+            ( function ( ) {
+            jQuery.browser.msie = false ;
+            jQuery.browser.version = 0 ;
+            if ( navigator.userAgent.match ( /MSIE ([0-9]+)\./ ) ) {
+            jQuery.browser.msie = true ;
+            jQuery.browser.version = RegExp.$1 ;
+            }
+            } ) ( ) ;
+        </script>
 
+        <script src="@routes.Assets.at("javascripts/lib/jquery-ui/jquery-ui-1.9.1.custom.min.js")" type="text/javascript"></script>
         <script src="@routes.Assets.at("javascripts/lib/require/require.js")" type="text/javascript"></script>
         <script src="@routes.Assets.at("javascripts/app/main.js")" type="text/javascript"></script>
 
@@ -27,7 +39,7 @@
         @*<script src="lib/jquery-ui/jquery-ui-1.9.1.custom.min.js" type="text/javascript"></script>*@
         @*<script src="@routes.Assets.at("javascripts/lib/jquery/jquery-1.11.1.js")" type="text/javascript"></script>*@
 
-        <script src="@routes.Assets.at("javascripts/lib/jqgrid/js/jquery.jqGrid.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/lib/jqgrid/js/jquery.jqGrid.js")" type="text/javascript"></script>
         <script src="@routes.Assets.at("javascripts/lib/jqgrid/js/i18n/grid.locale-en.js")" type="text/javascript"></script>
 
         @*<!-- Using Require.js validates PureMVC and applications based on it load as AMD modules -->*@
