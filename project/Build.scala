@@ -1,4 +1,3 @@
-import _root_.com.github.mumoshu.play2.typescript.TypeScriptPlugin._
 import _root_.sbt.Build
 import _root_.sbt.Keys
 import sbt._
@@ -15,7 +14,7 @@ object ApplicationBuild extends Build {
     // Add your project dependencies here,
   )
 
-//  val main = play.Project(appName, appVersion, appDependencies)
+  val main = play.Project(appName, appVersion, appDependencies)
 //    .settings(typescriptSettings: _*)
 //    .settings(
 //      tsOptions ++= Seq("--sourcemap")

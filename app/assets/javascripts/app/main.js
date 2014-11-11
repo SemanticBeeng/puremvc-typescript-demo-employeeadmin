@@ -34,8 +34,8 @@ require.config
 
 		paths:
 		{
-			puremvc: 'lib/puremvc/puremvc-typescript-standard-1.0-min',
-			EmployeeAdmin: 'bin/puremvc-typescript-employeeadmin-1.0-min'
+			puremvc: 'assets/javascripts/app/lib/puremvc/puremvc-typescript-standard-1.0',
+			EmployeeAdmin: 'assets/javascripts/app/bin/puremvc-typescript-employeeadmin-1.0'
 		},
 
 		shims:
