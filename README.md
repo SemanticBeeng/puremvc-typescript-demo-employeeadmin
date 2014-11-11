@@ -2,6 +2,26 @@
 
 Demo for creating a Single Page Application with PureMVC, Play Framework and TypeScript 
 
+## Building & running
+
+### Batch compiling TypeScript files
+
+$ ant -f build\build.xml
+
+This generates
+
+$ ls -la app\assets\javascripts\app\bin
+
+puremvc-typescript-employeeadmin-1.0-min.js
+puremvc-typescript-employeeadmin-1.0.js
+
+which is "require.js"-ed from main.js.
+
+## Building and running Play
+
+$ sbt run
+
+
 ## License
 * PureMVC TypeScript Demo - Employee Admin (jQuery) - Copyright © 2012 Frederic Saunier
 * PureMVC AS3 Demo - Flex Employee Admin - Copyright © 2007, 2008 Clifford Hall
