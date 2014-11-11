@@ -30,12 +30,12 @@
 require.config
 (
 	{
-		baseUrl: '.',
+        baseUrl: 'assets/javascripts/',
 
 		paths:
 		{
-			puremvc: 'assets/javascripts/app/lib/puremvc/puremvc-typescript-standard-1.0',
-			EmployeeAdmin: 'assets/javascripts/app/bin/puremvc-typescript-employeeadmin-1.0'
+			puremvc: 'lib/puremvc/puremvc-typescript-standard-1.0',
+			EmployeeAdmin: 'app/bin/puremvc-typescript-employeeadmin-1.0'
 		},
 
 		shims:
