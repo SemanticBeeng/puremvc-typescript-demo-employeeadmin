@@ -23,19 +23,19 @@
         baseUrl: 'assets/javascripts/',
 
         paths: {
-            //webjars
-           'jquery': ['/assets/lib/jquery/jquery'],
 //            //webjars
-//           'jquery-ui': ['/assets/lib/jquery-ui/jquery-ui'],
-            //local
-           'jquery-ui': ['./lib/jquery-ui/jquery-ui-1.9.1.custom.min'],
-//            //webjars
-//           'jqgrid': ['/assets/lib/jqgrid/js/jquery.jqGrid'],
-            //local
-           'jqgrid': ['./lib/jqgrid/js/jquery.jqGrid'],
-//
-//            'jquery-jqGridLocale': ['./lib/jqgrid/js/i18n/grid.locale-en'],
-            //jQueryGridLocale: 'lib/jqgrid/js/i18n/grid.locale-en',
+//           'jquery': ['/assets/lib/jquery/jquery'],
+////            //webjars
+////           'jquery-ui': ['/assets/lib/jquery-ui/jquery-ui'],
+//            //local
+//           'jquery-ui': ['./lib/jquery-ui/jquery-ui-1.9.1.custom.min'],
+////            //webjars
+////           'jqgrid': ['/assets/lib/jqgrid/js/jquery.jqGrid'],
+//            //local
+//           'jqgrid': ['./lib/jqgrid/js/jquery.jqGrid'],
+////
+////            'jquery-jqGridLocale': ['./lib/jqgrid/js/i18n/grid.locale-en'],
+//            //jQueryGridLocale: 'lib/jqgrid/js/i18n/grid.locale-en',
 
             puremvc: ['./lib/puremvc/puremvc-typescript-standard-1.0'],
 
@@ -53,35 +53,27 @@
                 exports: 'jsRoutes'
             },
 
-            'jquery-ui': {
-                deps: ['jquery'],
-                exports: 'jquery-ui'
-            },
+//            'jquery-ui': {
+//                deps: ['jquery'],
+//                exports: 'jquery-ui'
+//            },
+//
+//            'jqgrid': {
+//                deps: ['jquery', 'jquery-ui'],
+//                exports: 'jqgrid'
+//            },
+//
+////            'common-lib': {
+////                deps: ['jquery', 'jquery-ui', 'jquery-jqGrid', 'jquery-jqGridLocale']
+////            },
 
-            'jqgrid': {
-                deps: ['jquery', 'jquery-ui'],
-                exports: 'jqgrid'
-            },
-
-//            'common-lib': {
-//                deps: ['jquery', 'jquery-ui', 'jquery-jqGrid', 'jquery-jqGridLocale']
+//            'puremvc': {
+//                exports: 'puremvc'
 //            },
 
-            'puremvc': {
-                exports: 'puremvc'
-            },
+            'EmployeeAdmin': ['jquery', 'jquery-ui', 'jquery.jqGrid']
 
-            'EmployeeAdmin': {
-                //@todo ['common-lib', 'dashboard', 'module1', 'module2'],
-                //deps: ['puremvc', 'jquery', 'jquery-ui', 'jqGgid', 'jquery-jqGridLocale']
-                deps: ['jquery', 'jquery-ui', 'jqgrid', 'puremvc']
-            },
-
-            'appBoot': {
-                //deps: ['jquery', 'jquery-ui', 'jqgrid', 'EmployeeAdmin'],
-                deps: ['EmployeeAdmin'],
-                exports: 'appBoot'
-            }
+            //'appBoot': ['EmployeeAdmin']
 
         }
     });
@@ -95,7 +87,7 @@
      */
     var start = new Date();
 
-    requirejs(['jquery', 'jquery-ui', 'jqgrid', 'EmployeeAdmin', 'appBoot'],  function() {
+    requirejs(['appBoot'],  function() {
         // log the global context's defineds
         console.log("require.s.contexts._.defined", require.s.contexts._.defined);
     });
