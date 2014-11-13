@@ -1,26 +1,10 @@
 /**
- * Standard main.js file used by Require.js to load each module in a parallel process but
- * respecting dependencies declaration precedence order before initializing each.
- *
- * Here, as loading jQuery and its dependencies would have required each of the library to be
- * modified and loaded using Require-jQuery https://github.com/jrburke/require-jquery it has been
- * decided to only load the Employee Admin module and the PureMVC library as a proof of concept
- * for PureMVC TypeScript applications to be loaded asynchronously as AMD modules by Require.js.
- *
- * Employee Admin module has been compiled with the standard AMD wrapper :
- *
- * if( typeof define === "function" )
- * {
- * 		define( "EmployeeAdmin", ['puremvc'], function(puremvc)
- *		{
- *			//TypeScript generated JavaScript code here
- *		}
- * }
- *
- * Have a look at : http://www.tekool.net/blog//2012/11/07/puremvc-typescript/ for more explanations
- * on how the Ant task bundled in the project create the appropriate AMD module file using multiple
- * module files as TypeScript still has some problem with that.
+ * http://requirejs.org/docs/jquery.html
+ * https://github.com/requirejs/example-jquery-shim
  */
+//define('jquery', [], function() {
+//    return jQuery;
+//});
 
 /***************************************************************************************************
  * Define the Require.js config for the Employee Admin demo.
@@ -39,35 +23,59 @@
         baseUrl: 'assets/javascripts/',
 
         paths: {
-            jQuery: 'lib/jquery/jquery-1.9.1',
+            //webjars
+           'jquery': ['/assets/lib/jquery/jquery'],
+//            //webjars
+//           'jquery-ui': ['/assets/lib/jquery-ui/jquery-ui'],
+            //local
+           'jquery-ui': ['./lib/jquery-ui/jquery-ui-1.9.1.custom.min'],
+//            //webjars
+//           'jqgrid': ['/assets/lib/jqgrid/js/jquery.jqGrid'],
+            //local
+           'jqgrid': ['./lib/jqgrid/js/jquery.jqGrid'],
+//
+//            'jquery-jqGridLocale': ['./lib/jqgrid/js/i18n/grid.locale-en'],
+            //jQueryGridLocale: 'lib/jqgrid/js/i18n/grid.locale-en',
 
-            puremvc: 'lib/puremvc/puremvc-typescript-standard-1.0',
+            puremvc: ['./lib/puremvc/puremvc-typescript-standard-1.0'],
 
-            EmployeeAdmin: 'app/bin/puremvc-typescript-employeeadmin-1.0'
+            EmployeeAdmin: ['./app/bin/puremvc-typescript-employeeadmin-1.0'],
+
+            appBoot: ['./app/appBoot']
 
             //@todo 'jsRoutes': ['/jsroutes']
         },
 
         shims: {
-            'jQuery': {
-                exports: '$'
-            },
 
             'jsRoutes': {
                 deps: [],
                 exports: 'jsRoutes'
             },
-            // Hopefully this all will not be necessary but can be fetched from WebJars in the future
-            'puremvc': {
+
+            'jquery-ui': {
                 deps: ['jquery'],
+                exports: 'jquery-ui'
+            },
+
+            'jqgrid': {
+                deps: ['jquery-ui'],
+                exports: 'jqgrid'
+            },
+
+//            'common-lib': {
+//                deps: ['jquery', 'jquery-ui', 'jquery-jqGrid', 'jquery-jqGridLocale']
+//            },
+
+            'puremvc': {
                 exports: 'puremvc'
             },
 
             'EmployeeAdmin': {
-                deps: ["puremvc", "common", 'dashboard', 'module1', 'module2']
-                //exports: 'eaApp'
+                //deps: ['puremvc', 'common-lib', 'dashboard', 'module1', 'module2'],
+                //deps: ['puremvc', 'jquery', 'jquery-ui', 'jqGgid', 'jquery-jqGridLocale']
+                deps: ['jquery', 'jquery-ui', 'jqgrid']
             }
-
         }
     });
 
@@ -78,15 +86,17 @@
     /***************************************************************************************************
      * Start loading each module and its dependencies.
      */
-    require(['EmployeeAdmin'],
+    var start = new Date();
 
-        function (app) {
-            //Wait for the DOM to be ready before setting up the application.
-            $(function () {
-                var applicationFacade = app.ApplicationFacade.getInstance();
-                applicationFacade.startup(jQuery("body"));
-            })
-        }
-    );
+    requirejs(['app/appBoot'],  function() {
+        // log the global context's defineds
+        console.log("require.s.contexts._.defined", require.s.contexts._.defined);
+    });
+
+    requirejs.onResourceLoad = function(context, map, depArray) {
+        var duration = new Date() - start;
+        console.log("onResourceLoad", duration + "ms", map.id);
+    };
+
 
 })(requirejs);
