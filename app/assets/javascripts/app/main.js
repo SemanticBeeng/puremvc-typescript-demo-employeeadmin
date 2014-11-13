@@ -59,7 +59,7 @@
             },
 
             'jqgrid': {
-                deps: ['jquery-ui'],
+                deps: ['jquery', 'jquery-ui'],
                 exports: 'jqgrid'
             },
 
