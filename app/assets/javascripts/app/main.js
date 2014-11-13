@@ -72,13 +72,14 @@
             },
 
             'EmployeeAdmin': {
-                //deps: ['puremvc', 'common-lib', 'dashboard', 'module1', 'module2'],
+                //@todo ['common-lib', 'dashboard', 'module1', 'module2'],
                 //deps: ['puremvc', 'jquery', 'jquery-ui', 'jqGgid', 'jquery-jqGridLocale']
                 deps: ['jquery', 'jquery-ui', 'jqgrid', 'puremvc']
             },
 
             'appBoot': {
-                deps: ['jquery', 'jquery-ui', 'jqgrid', 'EmployeeAdmin'],
+                //deps: ['jquery', 'jquery-ui', 'jqgrid', 'EmployeeAdmin'],
+                deps: ['EmployeeAdmin'],
                 exports: 'appBoot'
             }
 
