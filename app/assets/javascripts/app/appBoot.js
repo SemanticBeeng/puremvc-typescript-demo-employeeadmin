@@ -1,4 +1,4 @@
-define(['jquery', 'jquery-ui', 'jqgrid', 'EmployeeAdmin'], function ($, a, b, app) {
+define(['jquery', 'EmployeeAdmin'], function ($, app) {
 
     $(function() {
 

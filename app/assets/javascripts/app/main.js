@@ -74,8 +74,14 @@
             'EmployeeAdmin': {
                 //deps: ['puremvc', 'common-lib', 'dashboard', 'module1', 'module2'],
                 //deps: ['puremvc', 'jquery', 'jquery-ui', 'jqGgid', 'jquery-jqGridLocale']
-                deps: ['jquery', 'jquery-ui', 'jqgrid']
+                deps: ['jquery', 'jquery-ui', 'jqgrid', 'puremvc']
+            },
+
+            'appBoot': {
+                deps: ['jquery', 'jquery-ui', 'jqgrid', 'EmployeeAdmin'],
+                exports: 'appBoot'
             }
+
         }
     });
 
@@ -88,7 +94,7 @@
      */
     var start = new Date();
 
-    requirejs(['app/appBoot'],  function() {
+    requirejs(['jquery', 'jquery-ui', 'jqgrid', 'EmployeeAdmin', 'appBoot'],  function() {
         // log the global context's defineds
         console.log("require.s.contexts._.defined", require.s.contexts._.defined);
     });
