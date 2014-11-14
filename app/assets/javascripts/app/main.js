@@ -33,8 +33,6 @@
 
             EmployeeAdmin: ['./app/bin/puremvc-typescript-employeeadmin-1.0'],
 
-            //jQueryFix: ['./app/jQueryFix'],
-
             appBoot: ['./app/appBoot']
         },
 
@@ -44,10 +42,6 @@
                 deps: [],
                 exports: 'jsRoutes'
             }
-
-            //'jquery-migrate' : ['jquery']
-
-            //'EmployeeAdmin': ['jquery', 'jQueryFix', 'jquery-ui', 'jquery.jqGrid']
 
         }
     });
@@ -61,10 +55,7 @@
      */
     var start = new Date();
 
-    requirejs(['appBoot'], function () {
-        // log the global context's defineds
-        console.log("require.s.contexts._.defined", require.s.contexts._.defined);
-    });
+    requirejs(['appBoot']);
 
     requirejs.onResourceLoad = function (context, map, depArray) {
         var duration = new Date() - start;
