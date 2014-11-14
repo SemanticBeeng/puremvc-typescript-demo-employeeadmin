@@ -1,3 +1,4 @@
+import com.typesafe.sbt.web.Import.WebKeys
 import sbt.Keys._
 import sbt._
 
@@ -24,6 +25,8 @@ object Build extends Build {
   val appVersion = "1.0-SNAPSHOT"
 
   val clientDependencies = Seq(
+//    filters,
+//    cache,
     "org.webjars" %% "webjars-play" % "2.3.0-2",
     //"org.webjars" % "requirejs" % "2.1.15",
     "org.webjars" % "jquery" % "2.1.1",
@@ -40,9 +43,10 @@ object Build extends Build {
     "org.webjars" % "underscorejs" % "1.6.0-3"
   )
 
-  val main = Project(appName, file(".")).enablePlugins(play.PlayJava).settings(
+  val main = Project(appName, file(".")).enablePlugins(play.PlayScala).settings(
     version := appVersion,
     libraryDependencies ++= clientDependencies
+   // playScalaSettings,
     //playAssetsDirectories <+= baseDirectory / "foo"
     //pipelineStages := Seq(rjs)
   ) //.enablePlugins(SbtWeb)
