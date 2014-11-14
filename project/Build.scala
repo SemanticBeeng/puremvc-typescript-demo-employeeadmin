@@ -26,14 +26,16 @@ object Build extends Build {
   val clientDependencies = Seq(
     "org.webjars" %% "webjars-play" % "2.3.0-2",
     //"org.webjars" % "requirejs" % "2.1.15",
-    //"org.webjars" % "jquery" % "2.1.1",
-    "org.webjars" % "jquery" % "1.9.1",
+    "org.webjars" % "jquery" % "2.1.1",
+    //"org.webjars" % "jquery" % "1.9.1",
 
-    //"org.webjars" % "jquery-ui" % "1.11.1",
-    "org.webjars" % "jquery-ui" % "1.9.1",
+    //"org.webjars" % "jquery-migrate" % "1.2.1",
+
+    "org.webjars" % "jquery-ui" % "1.11.1",
+    //"org.webjars" % "jquery-ui" % "1.9.1",
 
     //"org.webjars" % "jqgrid" % "4.6.0",
-    "org.webjars" % "jqgrid" % "4.4.5",
+    //"org.webjars" % "jqgrid" % "4.4.5",
 
     "org.webjars" % "underscorejs" % "1.6.0-3"
   )

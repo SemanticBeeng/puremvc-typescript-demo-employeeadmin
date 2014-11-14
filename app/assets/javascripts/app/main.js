@@ -23,27 +23,19 @@
         baseUrl: 'assets/javascripts/',
 
         paths: {
-//            //webjars
-//           'jquery': ['/assets/lib/jquery/jquery'],
-////            //webjars
-////           'jquery-ui': ['/assets/lib/jquery-ui/jquery-ui'],
-//            //local
-//           'jquery-ui': ['./lib/jquery-ui/jquery-ui-1.9.1.custom.min'],
-////            //webjars
-////           'jqgrid': ['/assets/lib/jqgrid/js/jquery.jqGrid'],
-//            //local
-//           'jqgrid': ['./lib/jqgrid/js/jquery.jqGrid'],
-////
-////            'jquery-jqGridLocale': ['./lib/jqgrid/js/i18n/grid.locale-en'],
-//            //jQueryGridLocale: 'lib/jqgrid/js/i18n/grid.locale-en',
+            'jquery-migrate': ['./lib/jquery/jquery-migrate-1.2.1'],
+
+            'jquery.jqGrid': ['./lib/jqgrid/js/jquery.jqGrid.min'],
+
+            'jquery.jqGrid-locale': ['./lib/jqgrid/js/i18n/grid.locale-en'],
 
             puremvc: ['./lib/puremvc/puremvc-typescript-standard-1.0'],
 
             EmployeeAdmin: ['./app/bin/puremvc-typescript-employeeadmin-1.0'],
 
-            appBoot: ['./app/appBoot']
+            //jQueryFix: ['./app/jQueryFix'],
 
-            //@todo 'jsRoutes': ['/jsroutes']
+            appBoot: ['./app/appBoot']
         },
 
         shims: {
@@ -51,29 +43,11 @@
             'jsRoutes': {
                 deps: [],
                 exports: 'jsRoutes'
-            },
+            }
 
-//            'jquery-ui': {
-//                deps: ['jquery'],
-//                exports: 'jquery-ui'
-//            },
-//
-//            'jqgrid': {
-//                deps: ['jquery', 'jquery-ui'],
-//                exports: 'jqgrid'
-//            },
-//
-////            'common-lib': {
-////                deps: ['jquery', 'jquery-ui', 'jquery-jqGrid', 'jquery-jqGridLocale']
-////            },
+            //'jquery-migrate' : ['jquery']
 
-//            'puremvc': {
-//                exports: 'puremvc'
-//            },
-
-            'EmployeeAdmin': ['jquery', 'jquery-ui', 'jquery.jqGrid']
-
-            //'appBoot': ['EmployeeAdmin']
+            //'EmployeeAdmin': ['jquery', 'jQueryFix', 'jquery-ui', 'jquery.jqGrid']
 
         }
     });
@@ -87,12 +61,12 @@
      */
     var start = new Date();
 
-    requirejs(['appBoot'],  function() {
+    requirejs(['appBoot'], function () {
         // log the global context's defineds
         console.log("require.s.contexts._.defined", require.s.contexts._.defined);
     });
 
-    requirejs.onResourceLoad = function(context, map, depArray) {
+    requirejs.onResourceLoad = function (context, map, depArray) {
         var duration = new Date() - start;
         console.log("onResourceLoad", duration + "ms", map.id);
     };
