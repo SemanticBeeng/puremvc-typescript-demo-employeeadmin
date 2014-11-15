@@ -19,7 +19,7 @@ import sbt._
  */
 object Build extends Build {
 
-  scalaVersion := "2.11.2"
+  // this does not take effect ?? scalaVersion := "2.11.2"
 
   val appName = "PureMVC-TypeScript-Play-Demo-EmployeeAdmin"
   val appVersion = "1.0-SNAPSHOT"

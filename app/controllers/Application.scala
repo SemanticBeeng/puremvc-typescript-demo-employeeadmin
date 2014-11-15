@@ -1,10 +1,9 @@
 package controllers
 
 import java.io.File
-import play.api.cache._
 
 import play.api._
-import play.api.Play.current
+import play.api.cache._
 import play.api.mvc._
 
 object Application extends Controller {
@@ -22,27 +21,13 @@ object Application extends Controller {
 
   /** load an HTML page from public/html */
   def loadWebComponentHTML(module: String, webc: String) = Action {
-    val projectRoot:File = Play.current.path
+    val projectRoot: File = Play.current.path
     val file = new File(projectRoot.getAbsolutePath + getURI("app/modules/" + module + "/" + webc + ".html"))
     if (file.exists())
       Ok(scala.io.Source.fromFile(file.getCanonicalPath).mkString).as("text/html")
     else
       NotFound
   }
-
-//  /**
-//   *
-//   * @return
-//   */
-//  def javascriptRoutes = Action { implicit request =>
-//    import routes.javascript._
-//    Ok(
-//      Routes.javascriptRouter("jsRoutes")(
-//        Users.find
-//        /*Contacts.save,
-//        Contacts.update,
-//        Contacts.delete*/).as("text/javascript"))
-//  }
 
   /**
    * Retrieves all routes via reflection.
@@ -52,11 +37,21 @@ object Application extends Controller {
   val routeCache = {
     val jsRoutesClass = classOf[routes.javascript]
     val controllers = jsRoutesClass.getFields.map(_.get(null))
+
     controllers.flatMap { controller =>
-      controller.getClass.getDeclaredMethods.map { action =>
-        action.invoke(controller).asInstanceOf[play.core.Router.JavascriptReverseRoute]
+      if (controller.getClass.getName.endsWith("WebJarAssets"))
+        None
+      else {
+        println(controller.toString)
+        controller.getClass.getDeclaredMethods.map { action =>
+          println(action.toString)
+          action.invoke(controller).asInstanceOf[play.core.Router.JavascriptReverseRoute]
+        }
       }
     }
+//    Seq(
+//      modules.userMgmt.controllers.Users.find.invoke(controller)
+//    )
   }
 
   /**
