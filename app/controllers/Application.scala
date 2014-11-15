@@ -5,6 +5,7 @@ import java.io.File
 import play.api._
 import play.api.cache._
 import play.api.mvc._
+import play.api.Play.current
 
 object Application extends Controller {
 
@@ -35,23 +36,25 @@ object Application extends Controller {
    * @todo If you have controllers in multiple packages, you need to add each package here.
    */
   val routeCache = {
-    val jsRoutesClass = classOf[routes.javascript]
-    val controllers = jsRoutesClass.getFields.map(_.get(null))
+    println(play.api.Play.current.path)
 
-    controllers.flatMap { controller =>
-      if (controller.getClass.getName.endsWith("WebJarAssets"))
-        None
-      else {
-        println(controller.toString)
-        controller.getClass.getDeclaredMethods.map { action =>
-          println(action.toString)
-          action.invoke(controller).asInstanceOf[play.core.Router.JavascriptReverseRoute]
+    val jsRoutesClasses = Array(classOf[routes.javascript], classOf[modules.userMgmt.controllers.routes.javascript])
+
+    jsRoutesClasses.flatMap(jsc => {
+      val controllers = jsc.getFields.map(_.get(null))
+
+      controllers.flatMap { controller =>
+        if (controller.getClass.getName.endsWith("WebJarAssets"))
+          None
+        else {
+          println(controller.toString)
+          controller.getClass.getDeclaredMethods.map { action =>
+            println(action.toString)
+            action.invoke(controller).asInstanceOf[play.core.Router.JavascriptReverseRoute]
+          }
         }
       }
-    }
-//    Seq(
-//      modules.userMgmt.controllers.Users.find.invoke(controller)
-//    )
+    })
   }
 
   /**

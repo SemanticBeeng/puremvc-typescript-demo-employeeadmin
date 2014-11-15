@@ -2,8 +2,13 @@
 
 Demo for creating a Single Page Application with PureMVC, Play Framework and TypeScript 
 
-## Building & running
+## Developing, Building & running
 
+### To generate the Intellij Idea project ready for debugging in Play
+ 
+ $ sbt
+ $ idea with-sources=yes
+ 
 ### Batch compiling TypeScript files
 
 $ ant -f build\build.xml
