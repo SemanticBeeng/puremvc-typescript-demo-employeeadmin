@@ -1,10 +1,22 @@
-/.idea
-/*.iml
-/.idea_modules
-/bin
-/logs
+# IDEA
+#######
+**/.idea
+**/*.iml
+**/.idea_modules
+
+# Ignore Play! working directory #
+######################
 /project/project
 /project/target
-/target
+target
+app/modules/*/project/project
+app/modules/*/target
+
 app/assets/javascripts/**/*.js.map
+
+# Misc
+######
+/bin
+/logs
 /tmp
+

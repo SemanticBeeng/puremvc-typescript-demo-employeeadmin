@@ -1,4 +1,4 @@
-package modules.userMgmt.model;
+package modules.customerMgmt.app.model;
 
 /**
  *

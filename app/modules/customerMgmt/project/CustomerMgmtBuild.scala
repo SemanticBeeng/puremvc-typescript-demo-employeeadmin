@@ -17,16 +17,16 @@ import sbt._
  * todo
  * https://github.com/webjars/typeaheadjs
  */
-object Build extends Build {
+object CustomerMgmtBuild extends Build {
 
   // this does not take effect ?? scalaVersion := "2.11.2"
 
-  val appName = "PureMVC-TypeScript-Play-Demo-EmployeeAdmin"
+  val appName = "PureMVC-TypeScript-Play-Demo-EmployeeAdmin-customerMgtm"
   val appVersion = "1.0-SNAPSHOT"
 
   val clientDependencies = Seq(
-    //    filters,
-    //    cache,
+//    filters,
+//    cache,
     "org.webjars" %% "webjars-play" % "2.3.0-2",
     //"org.webjars" % "requirejs" % "2.1.15",
     "org.webjars" % "jquery" % "2.1.1",
@@ -45,16 +45,13 @@ object Build extends Build {
 
   lazy val common = project.in(file("modules/common"))
 
-  lazy val customerMgmt = project.in(file("modules/customerMgmt"))
-
-  val main = Project(appName, file(".")).enablePlugins(play.PlayScala).settings(
+  val customeMgmt= Project(appName, file(".")).enablePlugins(play.PlayScala).settings(
     version := appVersion,
     libraryDependencies ++= clientDependencies
-    // playScalaSettings,
+   // playScalaSettings,
     //playAssetsDirectories <+= baseDirectory / "foo"
     //pipelineStages := Seq(rjs)
-  ).dependsOn(common, customerMgmt)
-    .aggregate(common, customerMgmt)
+  ).dependsOn(common)
 
 
 }

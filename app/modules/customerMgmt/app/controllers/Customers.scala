@@ -1,13 +1,13 @@
-package modules.userMgmt.controllers
+package modules.customerMgmt.app.controllers
 
 import controllers.common.RenderMultipleFormats
-import modules.userMgmt.model.Customer
+import modules.customerMgmt.app.model.Customer
 import play.api.data.Forms._
 import play.api.data._
 import play.api.libs.json._
 import play.api.mvc._
 
-object Users extends RenderMultipleFormats[Customer] {
+object Customers extends RenderMultipleFormats[Customer] {
 
 //  val form = Form(
 //    mapping(

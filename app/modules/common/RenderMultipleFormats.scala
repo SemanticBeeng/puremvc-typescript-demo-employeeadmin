@@ -1,10 +1,8 @@
-package controllers.common
+package modules.common
 
-import play.api.mvc._
 import play.api.data._
-import play.api.data.Forms._
-import play.api.data.validation._
 import play.api.libs.json._
+import play.api.mvc._
 import play.twirl.api.Html
 
 trait RenderMultipleFormats[T] extends Controller {

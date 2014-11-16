@@ -2,12 +2,11 @@ package controllers
 
 import java.io.File
 
-import play.api._
-import play.api.cache._
-import play.api.mvc._
-import play.api.Play.current
+import modules.common.JsRouteGenerator
+import play.api.Play
+import play.api.mvc.{Controller, Action}
 
-object Application extends Controller {
+object Application extends Controller with JsRouteGenerator {
 
   def index = Action {
     Ok(views.html.index("Your new application is ready."))
@@ -30,42 +29,10 @@ object Application extends Controller {
       NotFound
   }
 
-  /**
-   * Retrieves all routes via reflection.
-   * http://stackoverflow.com/questions/12012703/less-verbose-way-of-generating-play-2s-javascript-router
-   * @todo If you have controllers in multiple packages, you need to add each package here.
-   */
-  val routeCache = {
-    println(play.api.Play.current.path)
+  import controllers.routes.javascript
 
-    val jsRoutesClasses = Array(classOf[routes.javascript], classOf[modules.userMgmt.controllers.routes.javascript])
-
-    jsRoutesClasses.flatMap(jsc => {
-      val controllers = jsc.getFields.map(_.get(null))
-
-      controllers.flatMap { controller =>
-        if (controller.getClass.getName.endsWith("WebJarAssets"))
-          None
-        else {
-          println(controller.toString)
-          controller.getClass.getDeclaredMethods.map { action =>
-            println(action.toString)
-            action.invoke(controller).asInstanceOf[play.core.Router.JavascriptReverseRoute]
-          }
-        }
-      }
-    })
-  }
-
-  /**
-   * Returns the JavaScript router that the client can use for "type-safe" routes.
-   * Uses browser caching; set duration (in seconds) according to your release cycle.
-   * @param varName The name of the global variable, defaults to `jsRoutes`
-   */
-  def jsRoutes(varName: String = "jsRoutes") = Cached(_ => "jsRoutes", duration = 86400) {
-    Action { implicit request =>
-      Ok(Routes.javascriptRouter(varName)(routeCache: _*)).as(JAVASCRIPT)
-    }
+  override def jsRouteClass: Class[javascript] = {
+    classOf[javascript]
   }
 
 }
