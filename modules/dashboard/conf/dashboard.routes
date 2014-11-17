@@ -7,6 +7,7 @@ GET        /                    controllers.dashboard.Application.index
 
 GET        /jsroutes.js         controllers.dashboard.Application.jsRoutes()
 
+# 'Dashboard' module does not know about 'customerMgmr'
 #->         /customerMgmt        customerMgmt.Routes
 
 
