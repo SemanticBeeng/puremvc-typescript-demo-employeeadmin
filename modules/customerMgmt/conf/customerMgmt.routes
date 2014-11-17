@@ -1,0 +1,9 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+GET        /jsroutes.js        controllers.customerMgmt.Application.jsRoutes()
+
+# User Mgmt
+GET        /find/:name         controllers.customerMgmt.Customers.find(name: String)
+

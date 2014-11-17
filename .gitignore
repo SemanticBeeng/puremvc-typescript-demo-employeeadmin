@@ -1,10 +1,10 @@
-# IDEA
+# Ignore IDEA projects
 #######
 **/.idea
 **/*.iml
 **/.idea_modules
 
-# Ignore Play! working directory #
+# Ignore Play! working directory
 ######################
 /project/project
 /project/target
@@ -12,7 +12,8 @@ target
 app/modules/*/project/project
 app/modules/*/target
 
-app/assets/javascripts/**/*.js.map
+# Ignore byproducts of build
+**/*.js.map
 
 # Misc
 ######

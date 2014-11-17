@@ -1,0 +1,17 @@
+# ADMIN Routes
+# This file defines ADMIN application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET        /                    controllers.dashboard.Application.index
+
+GET        /jsroutes.js         controllers.dashboard.Application.jsRoutes()
+
+#->         /customerMgmt        customerMgmt.Routes
+
+
+# Map static resources from the /public folder to the /assets URL path
+# todo GET     /assets/*file               controllers.dashboard.Assets.versioned(path="/public", file: Asset)
+
+
+# ->         /                   common.Routes

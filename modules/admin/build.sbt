@@ -1,0 +1,10 @@
+Root.serviceSettings("admin")
+
+// Add here the specific settings for this module
+
+
+libraryDependencies ++= Root.commonDependencies ++: Seq(
+	// Add here the specific dependencies for this module:
+	// jdbc,
+	// anorm
+)

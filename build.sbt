@@ -1,10 +1,16 @@
-name := "PureMVC-TypeScript-Play-Demo-EmployeeAdmin"
+Root.appSettings
 
-scalaVersion := "2.11.2"
-//playScalaSettings
+lazy val common = (project in file("modules/common")).enablePlugins(PlayScala)
 
-//version := "2.7.3"
+lazy val admin = (project in file("modules/admin")).enablePlugins(PlayScala).dependsOn(common)
 
-libraryDependencies ++= Seq(
-  cache
-)
+lazy val dashboard = (project in file("modules/dashboard")).enablePlugins(PlayScala).dependsOn(common)
+
+lazy val customerMgmt = (project in file("modules/customerMgmt")).enablePlugins(PlayScala).dependsOn(common)
+
+lazy val root = (project in file(".")).enablePlugins(PlayScala).
+  aggregate(common, admin, dashboard, customerMgmt).
+  dependsOn(common, admin, dashboard, customerMgmt)
+
+libraryDependencies ++= Root.commonDependencies
+
