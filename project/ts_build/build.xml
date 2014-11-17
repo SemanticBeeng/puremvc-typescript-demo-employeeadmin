@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project name="build" basedir="." default="build.src">
+<project name="build" basedir="" default="build.src">
 
 
 
@@ -57,7 +57,7 @@
 			<local name="tsc.compile.file.path"/>
 			<local name="tsc.compile.file.content"/>
 
-			<property name="tsc.compile.file.path" value="@{src}compile.list" />
+			<property name="tsc.compile.file.path" value="@{src}/compile.list" />
 
 			<!-- Optional arguments are not written to compile file when attributes not set -->
 			<condition property="out.arg" value="" else='${line.separator}--out "@{out}"'>

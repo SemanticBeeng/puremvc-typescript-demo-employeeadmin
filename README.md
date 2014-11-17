@@ -11,11 +11,13 @@ Demo for creating a Single Page Application with PureMVC, Play Framework and Typ
  
 ### Batch compiling TypeScript files
 
-$ ant -f build\build.xml
+$ set PROJECT_HOME=c:\D\projects\...
+$ cd %PROJECT_HOME%\modules\dashboard
+$ ant -Dproject.dir=%PROJECT_HOME%\modules\dashboard -f ..\..\project\ts_build\build.xml
 
 This generates
 
-$ ls -la app\assets\javascripts\app\bin
+$ ls -la %PROJECT_HOME%\modules\dashboard\app\assets\javascripts\dashboard\bin
 
 puremvc-typescript-employeeadmin-1.0-min.js
 puremvc-typescript-employeeadmin-1.0.js
