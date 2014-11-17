@@ -1,8 +1,6 @@
 package controllers.common
 
-import java.io.File
-
-import play.api.{Play, Routes}
+import play.api.Routes
 import play.api.cache.Cached
 import play.api.mvc.{Action, Controller}
 import play.api.Play.current
@@ -12,23 +10,23 @@ import play.api.Play.current
  */
 trait JsRouteGenerator[T] extends Controller {
 
-  /** resolve "any" into the corresponding HTML page URI */
-  protected def getURI(any: String): String = any match {
-    case "main" => "/public/html/main.html"
-    case "detail" => "/public/html/detail.html"
-    case _ => "error"
-  }
-
-
-  /** load an HTML page from public/html */
-  def loadWebComponentHTML(module: String, webc: String) = Action {
-    val projectRoot: File = Play.current.path
-    val file = new File(projectRoot.getAbsolutePath + getURI("app/modules/" + module + "/" + webc + ".html"))
-    if (file.exists())
-      Ok(scala.io.Source.fromFile(file.getCanonicalPath).mkString).as("text/html")
-    else
-      NotFound
-  }
+//  /** resolve "any" into the corresponding HTML page URI */
+//  protected def getURI(any: String): String = any match {
+//    case "main" => "/public/html/main.html"
+//    case "detail" => "/public/html/detail.html"
+//    case _ => "error"
+//  }
+//
+//
+//  /** load an HTML page from public/html */
+//  def loadWebComponentHTML(module: String, webc: String) = Action {
+//    val projectRoot: File = Play.current.path
+//    val file = new File(projectRoot.getAbsolutePath + getURI("app/modules/" + module + "/" + webc + ".html"))
+//    if (file.exists())
+//      Ok(scala.io.Source.fromFile(file.getCanonicalPath).mkString).as("text/html")
+//    else
+//      NotFound
+//  }
 
 
   /**

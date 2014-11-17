@@ -6,7 +6,7 @@
 # GET		/status					controllers.common.Application.status
 
 # Play routes serving HTML to AngularJS start with /views
-GET        /views/:module/:webc        controllers.common.Application.loadWebComponentHTML(module: String, webc: String)
+#GET        /views/:module/:webc        controllers.common.Application.loadWebComponentHTML(module: String, webc: String)
 
 # Versioned Assets
 # GET        /vassets/*file                  controllers.Assets.versioned(path="/public", file: Asset)
