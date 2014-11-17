@@ -20,7 +20,7 @@ $ ls -la app\assets\javascripts\app\bin
 puremvc-typescript-employeeadmin-1.0-min.js
 puremvc-typescript-employeeadmin-1.0.js
 
-which is "require.js"-ed from main.js.
+which is "require.js"-ed from main-dashboard.js.
 
 ## Building and running Play
 
