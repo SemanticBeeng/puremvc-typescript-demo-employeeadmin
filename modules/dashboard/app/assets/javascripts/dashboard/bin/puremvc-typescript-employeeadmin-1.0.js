@@ -123,7 +123,7 @@ if( typeof define === "function" )
             })();
             EmployeeAdmin.DeptEnum = DeptEnum;
         })(EmployeeAdmin || (EmployeeAdmin = {}));
-        ///<reference path='../../../typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
+        ///<reference path='../../../../../../../common/app/assets/javascripts/common/typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
         ///<reference path='../enum/DeptEnum.ts'/>
         /**
          * The value object in charge of transporting the data to describe each user of the application.
@@ -180,7 +180,7 @@ if( typeof define === "function" )
             })();
             EmployeeAdmin.UserVO = UserVO;
         })(EmployeeAdmin || (EmployeeAdmin = {}));
-        ///<reference path='../../../typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
+        ///<reference path='../../../../../../../common/app/assets/javascripts/common/typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
         /**
          * An enumeration of role items.
          */
@@ -297,7 +297,7 @@ if( typeof define === "function" )
             })();
             EmployeeAdmin.RoleEnum = RoleEnum;
         })(EmployeeAdmin || (EmployeeAdmin = {}));
-        ///<reference path='../../../typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
+        ///<reference path='../../../../../../../common/app/assets/javascripts/common/typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
         ///<reference path='../enum/RoleEnum.ts'/>
         /**
          * The value object in charge of transporting the data to describe each user roles.
@@ -320,7 +320,7 @@ if( typeof define === "function" )
             })();
             EmployeeAdmin.RoleVO = RoleVO;
         })(EmployeeAdmin || (EmployeeAdmin = {}));
-        ///<reference path='../../typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
+        ///<reference path='../../../../../../common/app/assets/javascripts/common/typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
         var __extends = this.__extends || function (d, b) {
             for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
             function __() { this.constructor = d; }
@@ -399,7 +399,7 @@ if( typeof define === "function" )
             })(puremvc.Proxy);
             EmployeeAdmin.UserProxy = UserProxy;
         })(EmployeeAdmin || (EmployeeAdmin = {}));
-        ///<reference path='../../typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
+        ///<reference path='../../../../../../common/app/assets/javascripts/common/typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
         ///<reference path='enum/RoleEnum.ts'/>
         ///<reference path='vo/RoleVO.ts'/>
         ///<reference path='vo/UserVO.ts'/>
@@ -551,7 +551,7 @@ if( typeof define === "function" )
             })(puremvc.Proxy);
             EmployeeAdmin.RoleProxy = RoleProxy;
         })(EmployeeAdmin || (EmployeeAdmin = {}));
-        ///<reference path='../../typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
+        ///<reference path='../../../../../../common/app/assets/javascripts/common/typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
         ///<reference path='../abc/ProxyNames.ts'/>
         ///<reference path='../model/vo/UserVO.ts'/>
         ///<reference path='../model/vo/RoleVO.ts'/>
@@ -595,7 +595,7 @@ if( typeof define === "function" )
                     user = new EmployeeAdmin.UserVO();
                     user.uname = "lstooge";
                     user.fname = "Larry";
-                    user.lname = "Stooge";
+                    user.lname = "StoogeX";
                     user.email = "larry@stooges.com";
                     user.password = "ijk456";
                     user.department = EmployeeAdmin.DeptEnum.ACCT;
@@ -661,7 +661,7 @@ if( typeof define === "function" )
             })();
             EmployeeAdmin.MediatorNames = MediatorNames;
         })(EmployeeAdmin || (EmployeeAdmin = {}));
-        ///<reference path='../../../typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
+        ///<reference path='../../../../../../../common/app/assets/javascripts/common/typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
         /**
          * A base class used for UI components of the application.
          *
@@ -836,8 +836,8 @@ if( typeof define === "function" )
                 return ListenerDescriptor;
             })();
         })(EmployeeAdmin || (EmployeeAdmin = {}));
-        ///<reference path='../../../typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
-        ///<reference path='../../../typings/jquery/jqueryui.d.ts'/>
+        ///<reference path='../../../../../../../common/app/assets/javascripts/common/typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
+        ///<reference path='../../../../../../../common/app/assets/javascripts/common/typings/jquery/jqueryui.d.ts'/>
         ///<reference path='../../model/vo/UserVO.ts'/>
         ///<reference path='UiComponent.ts'/>
         /**
@@ -1036,7 +1036,7 @@ if( typeof define === "function" )
             })(EmployeeAdmin.UiComponent);
             EmployeeAdmin.UserList = UserList;
         })(EmployeeAdmin || (EmployeeAdmin = {}));
-        ///<reference path='../../typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
+        ///<reference path='../../../../../../common/app/assets/javascripts/common/typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
         ///<reference path='../abc/NotificationNames.ts'/>
         ///<reference path='../abc/ProxyNames.ts'/>
         ///<reference path='../model/UserProxy.ts'/>
@@ -1184,8 +1184,8 @@ if( typeof define === "function" )
             })(puremvc.Mediator);
             EmployeeAdmin.UserListMediator = UserListMediator;
         })(EmployeeAdmin || (EmployeeAdmin = {}));
-        ///<reference path='../../../typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
-        ///<reference path='../../../typings/jquery/jqueryui.d.ts'/>
+        ///<reference path='../../../../../../../common/app/assets/javascripts/common/typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
+        ///<reference path='../../../../../../../common/app/assets/javascripts/common/typings/jquery/jqueryui.d.ts'/>
         ///<reference path='../../model/enum/DeptEnum.ts'/>
         ///<reference path='../../model/enum/RoleEnum.ts'/>
         ///<reference path='../../model/vo/RoleVO.ts'/>
@@ -1574,7 +1574,7 @@ if( typeof define === "function" )
             })(EmployeeAdmin.UiComponent);
             EmployeeAdmin.UserForm = UserForm;
         })(EmployeeAdmin || (EmployeeAdmin = {}));
-        ///<reference path='../../typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
+        ///<reference path='../../../../../../common/app/assets/javascripts/common/typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
         ///<reference path='../abc/NotificationNames.ts'/>
         ///<reference path='../abc/ProxyNames.ts'/>
         ///<reference path='../model/vo/RoleVO.ts'/>
@@ -1768,8 +1768,8 @@ if( typeof define === "function" )
             })(puremvc.Mediator);
             EmployeeAdmin.UserFormMediator = UserFormMediator;
         })(EmployeeAdmin || (EmployeeAdmin = {}));
-        ///<reference path='../../../typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
-        ///<reference path='../../../typings/jquery/jqueryui.d.ts'/>
+        ///<reference path='../../../../../../../common/app/assets/javascripts/common/typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
+        ///<reference path='../../../../../../../common/app/assets/javascripts/common/typings/jquery/jquery.d.ts'/>
         ///<reference path='UiComponent.ts'/>
         ///<reference path='../../model/vo/RoleVO.ts'/>
         ///<reference path='../../model/vo/UserVO.ts'/>
@@ -2073,7 +2073,7 @@ if( typeof define === "function" )
             })(EmployeeAdmin.UiComponent);
             EmployeeAdmin.RolePanel = RolePanel;
         })(EmployeeAdmin || (EmployeeAdmin = {}));
-        ///<reference path='../../typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
+        ///<reference path='../../../../../../common/app/assets/javascripts/common/typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
         ///<reference path='../abc/NotificationNames.ts'/>
         ///<reference path='../abc/ProxyNames.ts'/>
         ///<reference path='../model/RoleProxy.ts'/>
@@ -2236,8 +2236,8 @@ if( typeof define === "function" )
             })(puremvc.Mediator);
             EmployeeAdmin.RolePanelMediator = RolePanelMediator;
         })(EmployeeAdmin || (EmployeeAdmin = {}));
-        ///<reference path='../../typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
-        ///<reference path='../../typings/jquery/jqueryui.d.ts'/>
+        ///<reference path='../../../../../../common/app/assets/javascripts/common/typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
+        ///<reference path='../../../../../../common/app/assets/javascripts/common/typings/jquery/jqueryui.d.ts'/>
         ///<reference path='../abc/MediatorNames.ts'/>
         ///<reference path='../view/UserListMediator.ts'/>
         ///<reference path='../view/UserFormMediator.ts'/>
@@ -2284,7 +2284,7 @@ if( typeof define === "function" )
             })(puremvc.SimpleCommand);
             EmployeeAdmin.PrepViewCommand = PrepViewCommand;
         })(EmployeeAdmin || (EmployeeAdmin = {}));
-        ///<reference path='../../typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
+        ///<reference path='../../../../../../common/app/assets/javascripts/common/typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
         ///<reference path='PrepModelCommand.ts'/>
         ///<reference path='PrepViewCommand.ts'/>
         /**
@@ -2314,7 +2314,7 @@ if( typeof define === "function" )
             })(puremvc.MacroCommand);
             EmployeeAdmin.StartupCommand = StartupCommand;
         })(EmployeeAdmin || (EmployeeAdmin = {}));
-        ///<reference path='../../typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
+        ///<reference path='../../../../../../common/app/assets/javascripts/common/typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
         ///<reference path='../abc/NotificationNames.ts'/>
         ///<reference path='../abc/ProxyNames.ts'/>
         ///<reference path='../model/vo/UserVO.ts'/>
@@ -2347,8 +2347,9 @@ if( typeof define === "function" )
             })(puremvc.SimpleCommand);
             EmployeeAdmin.DeleteUserCommand = DeleteUserCommand;
         })(EmployeeAdmin || (EmployeeAdmin = {}));
-        ///<reference path='../typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
-        ///<reference path='../typings/jquery/jqueryui.d.ts'/>
+        ///<reference path='../../../../../common/app/assets/javascripts/common/typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
+        ///<reference path='../../../../../common/app/assets/javascripts/common/typings/jquery/jqueryui.d.ts'/>
+        ///<reference path='../../../../../common/app/assets/javascripts/common/typings/knockout/knockout.d.ts'/>
         ///<reference path='abc/NotificationNames.ts'/>
         ///<reference path='controller/StartupCommand.ts'/>
         ///<reference path='controller/DeleteUserCommand.ts'/>
@@ -2369,7 +2370,7 @@ if( typeof define === "function" )
                  * @param app
                  * 		The HTML root node element of the application.
                  */
-                ApplicationFacade.prototype.startup = function (app) {
+                ApplicationFacade.prototype.startup = function (app /*, ko:  KnockoutStatic*/) {
                     this.sendNotification(EmployeeAdmin.NotificationNames.STARTUP, app);
                 };
                 /**

@@ -1,5 +1,4 @@
-///<reference path='../../typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
-
+///<reference path='../../../../../../common/app/assets/javascripts/common/typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
 ///<reference path='../abc/NotificationNames.ts'/>
 ///<reference path='../abc/ProxyNames.ts'/>
 ///<reference path='../model/RoleProxy.ts'/>

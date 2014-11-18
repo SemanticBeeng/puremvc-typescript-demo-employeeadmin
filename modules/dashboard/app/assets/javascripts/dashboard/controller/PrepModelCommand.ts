@@ -1,4 +1,4 @@
-///<reference path='../../typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
+///<reference path='../../../../../../common/app/assets/javascripts/common/typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
 
 ///<reference path='../abc/ProxyNames.ts'/>
 ///<reference path='../model/vo/UserVO.ts'/>
@@ -48,7 +48,7 @@ module EmployeeAdmin
 			user = new UserVO();
 			user.uname = "lstooge";
 			user.fname = "Larry";
-			user.lname = "Stooge";
+			user.lname = "StoogeX";
 			user.email = "larry@stooges.com";
 			user.password = "ijk456";
 			user.department = DeptEnum.ACCT;

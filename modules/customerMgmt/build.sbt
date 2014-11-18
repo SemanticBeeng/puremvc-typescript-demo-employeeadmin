@@ -1,4 +1,4 @@
-Root.moduleSettings("customerMgmt")
+Root.serviceSettings("customerMgmt")
 
 // Add here the specific settings for this module
 

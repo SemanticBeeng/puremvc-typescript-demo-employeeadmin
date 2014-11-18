@@ -1,5 +1,6 @@
-///<reference path='../typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
-///<reference path='../typings/jquery/jqueryui.d.ts'/>
+///<reference path='../../../../../common/app/assets/javascripts/common/typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
+///<reference path='../../../../../common/app/assets/javascripts/common/typings/jquery/jqueryui.d.ts'/>
+///<reference path='../../../../../common/app/assets/javascripts/common/typings/knockout/knockout.d.ts'/>
 
 ///<reference path='abc/NotificationNames.ts'/>
 ///<reference path='controller/StartupCommand.ts'/>
@@ -21,7 +22,7 @@ module EmployeeAdmin
 		 * @param app
 		 * 		The HTML root node element of the application.
 		 */
-		startup( app:JQuery )
+		startup( app:JQuery/*, ko:  KnockoutStatic*/)
 		{
 			this.sendNotification( NotificationNames.STARTUP, app );
 		}

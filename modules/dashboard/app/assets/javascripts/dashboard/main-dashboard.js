@@ -25,6 +25,9 @@
         paths: {
             //common: "../lib/common/javascripts",
 
+            // Had to add this here but not for jquery
+            "knockout": [ webjars.path("knockout", "knockout") ],
+
             'jquery-migrate': ['./common/lib/jquery/jquery-migrate-1.2.1'],
 
             'jquery.jqGrid': ['./common/lib/jqgrid/js/jquery.jqGrid.min'],
@@ -39,6 +42,8 @@
         },
 
         shims: {
+
+            //"knockout": [ "kox" ],
 
             'jsRoutes': {
                 deps: [],

@@ -23,7 +23,7 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-coffeescript" % "1.0.0")
 
 //addSbtPlugin("com.typesafe.sbt" % "sbt-gzip" % "1.0.0")
 
+addSbtPlugin("com.typesafe.sbt" % "sbt-mocha" % "1.0.2")
 
 // @todo evaluatehttps://github.com/kolloch/sbt-html-js-wrap
 // @todo evaluatehttps://github.com/jmparsons/sbt-dustjs-linkedin
-// @todo evaluatehttps://github.com/sbt/sbt-mocha

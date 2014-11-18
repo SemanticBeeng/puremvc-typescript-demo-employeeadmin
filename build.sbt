@@ -14,3 +14,4 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala).
 
 libraryDependencies ++= Root.commonDependencies
 
+//MochaKeys.requires += "./Setup"
