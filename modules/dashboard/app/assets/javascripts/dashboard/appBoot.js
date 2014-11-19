@@ -11,14 +11,14 @@ define('appBoot', ['jquery'], function () {
         console.log("Applied jQuery fix : " + jQuery.browser != undefined);
 
         // Now that jquery is fixed, load plugins
-        require(['jquery', 'jquery-ui', 'jquery.jqGrid', 'jquery.jqGrid-locale', 'webjars!knockout.js', 'EmployeeAdmin'],
+        require(['jquery', 'jquery-ui', 'jquery.jqGrid', 'jquery.jqGrid-locale', 'knockout', 'EmployeeAdmin'],
             function ($, _1, _2, _3, ko, app) {
 
                 // Finally ...
                 console.log("Loaded libs, booting application ...");
 
                 var applicationFacade = app.ApplicationFacade.getInstance();
-                applicationFacade.startup( $('body'));
+                applicationFacade.startup( $('body'), ko);
             });
     });
 });

@@ -14,3 +14,7 @@
 //    },
 //
 //});
+//requirejs.config({
+//    paths: { "knockout": ['./dashboard/webjars/lib/knockout/knockout.debug.js'] }
+//    //shim: { "knockout": [ "kox" ] }
+//});

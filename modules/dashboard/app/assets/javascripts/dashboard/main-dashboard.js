@@ -43,7 +43,7 @@
 
         shims: {
 
-            //"knockout": [ "kox" ],
+            //"knockout": [ "ko" ],
 
             'jsRoutes': {
                 deps: [],
@@ -61,6 +61,12 @@
      * Start loading each module and its dependencies.
      */
     var start = new Date();
+
+    //define("knockout", ["webjars!knockout.js"], function(ko) {return ko});
+
+    //requirejs(['knockout']);
+
+    //define("knockout", ["webjars!knockout.js"], function() {return knockout});
 
     requirejs(['appBoot']);
 

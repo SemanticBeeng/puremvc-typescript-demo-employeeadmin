@@ -22,7 +22,7 @@ module EmployeeAdmin
 		 * @param app
 		 * 		The HTML root node element of the application.
 		 */
-		startup( app:JQuery/*, ko:  KnockoutStatic*/)
+		startup( app:JQuery, ko:  KnockoutStatic)
 		{
 			this.sendNotification( NotificationNames.STARTUP, app );
 		}

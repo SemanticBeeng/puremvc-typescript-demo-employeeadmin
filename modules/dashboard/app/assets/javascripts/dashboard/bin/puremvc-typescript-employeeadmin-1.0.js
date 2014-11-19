@@ -2370,7 +2370,7 @@ if( typeof define === "function" )
                  * @param app
                  * 		The HTML root node element of the application.
                  */
-                ApplicationFacade.prototype.startup = function (app /*, ko:  KnockoutStatic*/) {
+                ApplicationFacade.prototype.startup = function (app, ko) {
                     this.sendNotification(EmployeeAdmin.NotificationNames.STARTUP, app);
                 };
                 /**
