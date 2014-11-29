@@ -6,6 +6,10 @@
 /**
  * Start the application.
  */
+
+import viewRef = require('./PrepViewCommand');
+import modelRef = require('./PrepModelCommand');
+
 export class StartupCommand
 		extends puremvc.MacroCommand {
     /**
@@ -17,7 +21,8 @@ export class StartupCommand
      * preparation of the View (mostly registering Mediators).
      */
     initializeMacroCommand() {
-        //this.addSubCommand(PrepModelCommand);
-        //this.addSubCommand(PrepViewCommand);
+        debugger;
+        this.addSubCommand(modelRef.PrepModelCommand);
+        this.addSubCommand(viewRef.PrepViewCommand);
     }
 }

@@ -7,12 +7,14 @@
 /**
  * The UI component in charge of the <em>User List</em>.
  */
-module EmployeeAdmin
-{
-	"use strict";
+import uiComponentRef = require('./UiComponent');
+import userVOReference = require('./../../model/vo/UserVO');
+import roleVOReference = require('./../../model/vo/RoleVO');
+import roleEnumReference = require('./../../model/enum/RoleEnum');
+import deptEnumReference = require('./../../model/enum/DeptEnum');
 
-	export class UserList
-		extends UiComponent
+export class UserList
+		extends uiComponentRef.UiComponent
 	{
 
 		/**
@@ -48,7 +50,7 @@ module EmployeeAdmin
 		/**
 		 * The user list of the application.
 		 */
-		private users:UserVO[] = null;
+		private users:userVOReference.UserVO[] = null;
 
 		/**
 		 * Constructs a <code>UserList</code> instance.
@@ -149,7 +151,7 @@ module EmployeeAdmin
 			// Fill the data-grid
 			for(var i:number=0; i<userList.length; i++)
 			{
-				var user:UserVO = userList[i];
+				var user:userVOReference.UserVO = userList[i];
 				var rowData:any =
 				{
 					uname: user.uname,
@@ -201,7 +203,7 @@ module EmployeeAdmin
 			var uname:string;
 			for( var i:number=0; i<this.users.length; i++ )
 			{
-				var userVO:UserVO = this.users[i];
+				var userVO:userVOReference.UserVO = this.users[i];
 				if( userVO.uname === rowData.uname )
 				{
 					uname = rowData.uname;
@@ -252,5 +254,4 @@ module EmployeeAdmin
 		 * @constant
 		 */
 		static SELECT:string 	= "select";
-	}
 }

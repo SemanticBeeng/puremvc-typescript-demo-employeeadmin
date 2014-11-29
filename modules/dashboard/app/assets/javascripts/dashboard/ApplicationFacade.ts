@@ -12,6 +12,7 @@
 
 import refToNotifications = require('./abc/NotificationNames');
 import refToStartupCommand = require('./controller/StartupCommand');
+import refToDeleteCommand = require('./controller/DeleteUserCommand');
 
 export class ApplicationFacade
 		extends puremvc.Facade {
@@ -39,11 +40,10 @@ export class ApplicationFacade
      * <code>this.parent()</code> is also required.
      */
     initializeController():void {
-        super.initializeController();
-
         debugger;
+        super.initializeController();
         this.registerCommand(refToNotifications.NotificationNames.STARTUP, refToStartupCommand.StartupCommand);
-        //this.registerCommand(refToNotifications.NotificationNames.DELETE_USER, DeleteUserCommand);
+        this.registerCommand(refToNotifications.NotificationNames.DELETE_USER, refToDeleteCommand.DeleteUserCommand);
     }
 
     /**
