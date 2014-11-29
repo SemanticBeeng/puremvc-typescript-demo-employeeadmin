@@ -34,22 +34,19 @@
 
             'jquery.jqGrid-locale': ['./common/lib/jqgrid/js/i18n/grid.locale-en'],
 
-            puremvc: ['./common/lib/puremvc/puremvc-typescript-standard-1.0'],
-
-            EmployeeAdmin: ['./dashboard/bin/puremvc-typescript-employeeadmin-1.0'],
+            puremvc: ['./common/lib/puremvc/puremvc-typescript-standard-1.0-min'],
 
             appBoot: ['./dashboard/appBoot']
         },
 
         shims: {
 
-            //"knockout": [ "ko" ],
+            "knockout": [ "ko" ],
 
             'jsRoutes': {
                 deps: [],
                 exports: 'jsRoutes'
             }
-
         }
     });
 
@@ -64,7 +61,7 @@
 
     //define("knockout", ["webjars!knockout.js"], function(ko) {return ko});
 
-    //requirejs(['knockout']);
+    requirejs(['knockout']);
 
     //define("knockout", ["webjars!knockout.js"], function() {return knockout});
 
@@ -72,7 +69,7 @@
 
     requirejs.onResourceLoad = function (context, map, depArray) {
         var duration = new Date() - start;
-        console.log("onResourceLoad", duration + "ms", map.id);
+        console.log("[Resources Loaded]:", map.name, "in " + duration + " ms" + " from "+map.url);
     };
 
 

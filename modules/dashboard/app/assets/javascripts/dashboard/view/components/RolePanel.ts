@@ -72,18 +72,33 @@ module EmployeeAdmin
 		 * @param view
 		 * 		The jQuery element giving access to the corresponding UI HTML element in the page.
 		 */
-		constructor( view:JQuery )
-		{
-			super();
+		constructor( ko:KnockoutStatic ) {
+            super();
 
-			this.rolePanel = view;
+            $.ajax({
+                context: this,
+                type: "GET",
+                url: "assets/tmpl/roleList.html",
+                success: this.templateLoaded,
+                error: null,
+                complete: null
+            });
+        }
 
-			this.initializeChildren();
-			this.bindListeners();
+        private templateLoaded(data):void{
+            debugger;
 
-			this.fillRoleList();
-			this.setEnabled(false);
-		}
+            var x = $.parseHTML(data);
+            $('.application').append(x);
+
+            this.rolePanel = $('.role-panel');
+
+            this.initializeChildren();
+            this.bindListeners();
+
+            this.fillRoleList();
+            this.setEnabled(false);
+        }
 
 		/**
 		 * Initialize references to DOM elements using jQuery.
