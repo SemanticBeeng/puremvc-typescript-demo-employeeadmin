@@ -4,20 +4,17 @@
 /**
  * The value object in charge of transporting the data to describe each user roles.
  */
-module EmployeeAdmin
-{
-	"use strict";
 
-	export class RoleVO
-	{
-		/**
-		 * Unique name of the user to whom are associated the roles.
-		 */
-		uname:string = "";
+import roleEnumReference = require('./../enum/RoleEnum');
 
-		/**
-		 * The list of roles associated to the user.
-		 */
-		roles:RoleEnum[] = [];
-	}
+export class RoleVO {
+    /**
+     * Unique name of the user to whom are associated the roles.
+     */
+    uname:string = "";
+
+    /**
+     * The list of roles associated to the user.
+     */
+    roles:roleEnumReference.RoleEnum[] = [];
 }

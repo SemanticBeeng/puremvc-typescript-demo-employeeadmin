@@ -1,7 +1,7 @@
 /**
  * Does incremental, controlled loading to patch jQuery so that the grid does not break dou to the reference to jQuery.browser
  */
-define('appBoot', ['jquery'], function () {
+define('appBoot', ['jquery', 'puremvc'], function () {
 
     console.log("Loading application... ");
 
@@ -11,14 +11,14 @@ define('appBoot', ['jquery'], function () {
         console.log("Applied jQuery fix : " + jQuery.browser != undefined);
 
         // Now that jquery is fixed, load plugins
-        require(['jquery', 'jquery-ui', 'jquery.jqGrid', 'jquery.jqGrid-locale', 'knockout', 'EmployeeAdmin'],
-            function ($, _1, _2, _3, ko, app) {
+        require(['jquery', 'jquery-ui', 'jquery.jqGrid', 'jquery.jqGrid-locale', './dashboard/ApplicationFacade'],
+            function ($, _1, _2, _3, app) {
 
                 // Finally ...
                 console.log("Loaded libs, booting application ...");
 
                 var applicationFacade = app.ApplicationFacade.getInstance();
-                applicationFacade.startup( $('body'), ko);
+                applicationFacade.startup( $('body'));
             });
     });
 });

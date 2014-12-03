@@ -8,12 +8,8 @@
  * Implementers and listeners are responsible for the anonymous events object they dispatch and
  * receive.
  */
-module EmployeeAdmin
+export class UiComponent
 {
-	"use strict";
-
-	export class UiComponent
-	{
 		/**
 		 * Constructs a <code>UiComponent</code> instance.
 		 */
@@ -171,58 +167,52 @@ module EmployeeAdmin
 	 * Private class (this is what TypeScript compile today we better have to say) defining a
 	 * descriptor object used by the <code>listenerMap</code> to identify each event listener.
 	 */
-	class ListenerDescriptor
-	{
-		/**
-		 * The listener method to call.
-		 */
-		listener:Function;
+	class ListenerDescriptor {
+        /**
+         * The listener method to call.
+         */
+        listener:Function;
 
-		/**
-		 * The listener context with which to call the method.
-		 */
-		context:any;
+        /**
+         * The listener context with which to call the method.
+         */
+        context:any;
 
-		/**
-		 * Constructs a <code>ListenerDescriptor</code> instance.
-		 *
-		 * @param listener
-		 * 		The listener method to call.
-		 *
-		 * @param context
-		 * 		The listener context on which to call the method.
-		 */
-		constructor( listener:Function, context:any )
-		{
-			this.listener = listener;
-			this.context = context;
-		}
+        /**
+         * Constructs a <code>ListenerDescriptor</code> instance.
+         *
+         * @param listener
+         *        The listener method to call.
+         *
+         * @param context
+         *        The listener context on which to call the method.
+         */
+        constructor(listener:Function, context:any) {
+            this.listener = listener;
+            this.context = context;
+        }
 
-		/**
-		 * Compare two <code>ListenerDescriptor</code>s to determine if they target the exact
-		 * same event listener.
-		 *
-		 * @param compared
-		 * 		The descriptor that will be compared to the current.
-		 *
-		 * @return
-		 * 		The two compared listeners are equals.
-		 */
-		equals( compared:ListenerDescriptor ):bool
-		{
-			if( compared.listener === this.listener )
-			{
-				if( typeof compared.context != "undefined" )
-				{
-					if( compared.context == null && this.context == null )
-						return true;
+        /**
+         * Compare two <code>ListenerDescriptor</code>s to determine if they target the exact
+         * same event listener.
+         *
+         * @param compared
+         *        The descriptor that will be compared to the current.
+         *
+         * @return
+         *        The two compared listeners are equals.
+         */
+        equals(compared:ListenerDescriptor):boolean {
+            if (compared.listener === this.listener) {
+                if (typeof compared.context != "undefined") {
+                    if (compared.context == null && this.context == null)
+                        return true;
 
-					if( compared.context === this.context )
-						return true;
-				}
-			}
+                    if (compared.context === this.context)
+                        return true;
+                }
+            }
 
-			return false;
-		}
-	}
-}
+            return false;
+        }
+    }

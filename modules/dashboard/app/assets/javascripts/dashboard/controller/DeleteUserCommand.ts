@@ -11,26 +11,27 @@
 /**
  * Command used to delete a user from the main users list.
  */
-module EmployeeAdmin
-{
-	"use strict";
+import userProxyRef = require('./../model/UserProxy');
+import roleProxyRef = require('./../model/RoleProxy');
 
-	export class DeleteUserCommand
-		extends puremvc.SimpleCommand
-	{
-		/**
-		 * @override
-		 */
-		execute( note:puremvc.INotification ):void
-		{
-			var user:UserVO = note.getBody();
-			var userProxy:UserProxy = <UserProxy> /*</>*/ this.facade.retrieveProxy( ProxyNames.USER_PROXY );
-			var roleProxy:RoleProxy = <RoleProxy> /*</>*/ this.facade.retrieveProxy( ProxyNames.ROLE_PROXY );
+import userVOReference = require('./../model/vo/UserVO');
 
-			userProxy.deleteItem( user.uname );
-			roleProxy.deleteItem( user.uname );
+import proxyNamesRef = require('./../abc/ProxyNames');
+import notificationNamesRef = require('./../abc/NotificationNames');
 
-			this.sendNotification( NotificationNames.USER_DELETED );
-		}
-	}
+export class DeleteUserCommand
+		extends puremvc.SimpleCommand {
+    /**
+     * @override
+     */
+    execute(note:puremvc.INotification):void {
+        var user:userVOReference.UserVO = note.getBody();
+        var userProxy:userProxyRef.UserProxy = <userProxyRef.UserProxy> /*</>*/ this.facade.retrieveProxy(proxyNamesRef.ProxyNames.USER_PROXY);
+        var roleProxy:roleProxyRef.RoleProxy = <roleProxyRef.RoleProxy> /*</>*/ this.facade.retrieveProxy(proxyNamesRef.ProxyNames.ROLE_PROXY);
+
+        userProxy.deleteItem(user.uname);
+        roleProxy.deleteItem(user.uname);
+
+        this.sendNotification(notificationNamesRef.NotificationNames.USER_DELETED);
+    }
 }

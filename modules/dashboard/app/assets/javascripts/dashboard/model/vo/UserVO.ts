@@ -5,67 +5,62 @@
 /**
  * The value object in charge of transporting the data to describe each user of the application.
  */
-module EmployeeAdmin
-{
-	"use strict";
 
-	export class UserVO
-	{
-		/**
-		 * Unique name of the user.
-		 */
-		uname:string = "";
+import deptEnumReference = require('./../enum/DeptEnum');
 
-		/**
-		 * First name of the user.
-		 */
-		fname:string = "";
+export class UserVO {
+    /**
+     * Unique name of the user.
+     */
+    uname:string = "";
 
-		/**
-		 * Last name of the user.
-		 */
-		lname:string = "";
+    /**
+     * First name of the user.
+     */
+    fname:string = "";
 
-		/**
-		 * E-mail name of the user.
-		 */
-		email:string = "";
+    /**
+     * Last name of the user.
+     */
+    lname:string = "";
 
-		/**
-		 * Password name of the user.
-		 */
-		password:string = "";
+    /**
+     * E-mail name of the user.
+     */
+    email:string = "";
 
-		/**
-		 * The <code>DeptEnum</code> item associated to the user.
-		 */
-		department:DeptEnum = DeptEnum.NONE_SELECTED;
+    /**
+     * Password name of the user.
+     */
+    password:string = "";
 
-		/**
-		 * Indicate if the data shared by the value object are valid.
-		 *
-		 * @return
-		 * 		The data shared by the value object are valid.
-		 */
-		getIsValid():bool
-		{
-			return 	this.uname != ""
-					&&
-					this.password != ""
-					&&
-					this.department != DeptEnum.NONE_SELECTED
-			;
-		}
+    /**
+     * The <code>DeptEnum</code> item associated to the user.
+     */
+    department:deptEnumReference.DeptEnum = deptEnumReference.DeptEnum.NONE_SELECTED;
 
-		/**
-		 * Return the complete name for this user.
-		 *
-		 * @return
-		 * 		The complete name for this user.
-		 */
-		getGivenName():string
-		{
-			return this.lname + ", " + this.fname;
-		}
-	}
+    /**
+     * Indicate if the data shared by the value object are valid.
+     *
+     * @return
+     *        The data shared by the value object are valid.
+     */
+    getIsValid():boolean {
+        return    this.uname != ""
+            &&
+            this.password != ""
+            &&
+            this.department != deptEnumReference.DeptEnum.NONE_SELECTED
+            ;
+    }
+
+    /**
+     * Return the complete name for this user.
+     *
+     * @return
+     *        The complete name for this user.
+     */
+    getGivenName():string {
+        return this.lname + ", " + this.fname;
+    }
 }

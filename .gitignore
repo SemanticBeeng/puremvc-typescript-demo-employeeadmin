@@ -2,7 +2,8 @@
 #######
 **/.idea
 **/*.iml
-**/.idea_modules
+.idea_modules
+.idea
 
 # Ignore Play! working directory
 ######################
@@ -28,4 +29,7 @@ app/modules/*/target
 .settings
 .project
 .cache
+
+# All sources are TypeScript so we can ignore all *.js*
+**/javascripts/dashboard/**/*.js*
 
