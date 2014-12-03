@@ -21,3 +21,11 @@ app/modules/*/target
 /logs
 /tmp
 
+**/.ivy
+**/.boot
+
+.classpath
+.settings
+.project
+.cache
+

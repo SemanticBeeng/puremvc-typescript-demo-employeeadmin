@@ -20,7 +20,7 @@ object Customers extends RenderMultipleFormats[Customer] {
 //    }
 //  }
 
-  implicit val userWrites = new Writes[Customer] {
+  implicit val customerrites = new Writes[Customer] {
     def writes(customer: Customer) = {
       Json.obj(
         "firstName" -> JsString(customer.firstName),
@@ -28,9 +28,9 @@ object Customers extends RenderMultipleFormats[Customer] {
     }
   }
   
-  val extendedUserWrites = new Writes[Customer] {
+  val extendedCustomerWrites = new Writes[Customer] {
     def writes(customer: Customer) = {
-      userWrites.writes(customer) /*+ ("contacts" -> Writes.seq(contactWrites).writes(user.contacts))*/
+      customerrites.writes(customer) /*+ ("contacts" -> Writes.seq(contactWrites).writes(user.contacts))*/
     }
   }
 

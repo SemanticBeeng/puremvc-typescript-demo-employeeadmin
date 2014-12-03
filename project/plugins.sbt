@@ -5,6 +5,10 @@ resolvers += "Typesafe repository" at "http://repo.typesafe.com/typesafe/release
 
 //resolvers += "Sonatype OSS Snapshots Repository" at "http://oss.sonatype.org/content/groups/public"
 
+addSbtPlugin("com.github.mpeltonen" % "sbt-idea" % "1.6.0")
+
+addSbtPlugin("com.typesafe.sbteclipse" % "sbteclipse-plugin" % "2.5.0")
+
 addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.3.6")
 
 addSbtPlugin("com.typesafe.sbt" % "sbt-web" % "1.1.0")

@@ -1,8 +1,8 @@
-@*@(message: String, computers: List[Computer])*@
+@*(message: String, computers: List[Computer])*@
 
-@*@import controllers.admin.routes*@
+@* @import controllers.admin.routes*@
 
-@*@theModals = {*@
+@* @theModals = {*@
 	@*<div class="modal fade" id="myAdminModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">*@
 	  @*<div class="modal-dialog">*@
 	    @*<div class="modal-content">*@
@@ -21,7 +21,7 @@
 	@*</div>*@
 @*}*@
 
-@*@views.html.admin.main(title = message, modals = theModals) {*@
+@* @views.html.admin.main(title = message, modals = theModals) {*@
 	@**@
 	@*<div class="pull-right">*@
 		@*<img src="@routes.Assets.versioned("lib/common/images/normal-mini.png")" style="margin-top: 10px; margin-bottom: 20px"></img>*@
@@ -41,7 +41,7 @@
 			@*<th>Discontinued</th>*@
 			@*<th>Company</th>*@
 		@*</tr>*@
-		@*@computers.map { computer =>*@
+		@* @computers.map { computer =>*@
 			@*<tr>*@
 				@*<td>@computer.name</td>*@
 				@*<td>@computer.introduced</td>*@

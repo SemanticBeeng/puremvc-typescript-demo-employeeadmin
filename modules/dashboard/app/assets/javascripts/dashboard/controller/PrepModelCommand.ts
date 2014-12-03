@@ -48,7 +48,7 @@ module EmployeeAdmin
 			user = new UserVO();
 			user.uname = "lstooge";
 			user.fname = "Larry";
-			user.lname = "StoogeX";
+			user.lname = "Stooge";
 			user.email = "larry@stooges.com";
 			user.password = "ijk456";
 			user.department = DeptEnum.ACCT;
