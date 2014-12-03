@@ -33,7 +33,7 @@ export class RolePanelMediator
      */
     constructor(name:string, viewComponent:rolePanelRef.RolePanel) {
         super(name, viewComponent);
-
+        super.initializeNotifier("aa");
         this.registerListeners();
         this.roleProxy = <roleProxyRef.RoleProxy> /*</>*/ this.facade.retrieveProxy(proxyNamesRef.ProxyNames.ROLE_PROXY);
     }

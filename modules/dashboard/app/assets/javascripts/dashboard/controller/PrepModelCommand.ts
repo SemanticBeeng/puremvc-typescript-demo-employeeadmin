@@ -30,6 +30,7 @@ export class PrepModelCommand
         /*
          * Data initialization.
          */
+        debugger;
         var userProxy:puremvc.IProxy = new userProxyRef.UserProxy(proxyNamesRef.ProxyNames.USER_PROXY, this.generateUsers());
         var roleProxy:puremvc.IProxy = new roleProxyRef.RoleProxy(proxyNamesRef.ProxyNames.ROLE_PROXY, this.generateRoles());
 
