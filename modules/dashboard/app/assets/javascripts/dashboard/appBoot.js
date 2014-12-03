@@ -16,9 +16,10 @@ define('appBoot', ['jquery', 'puremvc'], function () {
 
                 // Finally ...
                 console.log("Loaded libs, booting application ...");
+                debugger;
+                var facade = app.ApplicationFacade.getInstance("aa");
 
-                var applicationFacade = app.ApplicationFacade.getInstance();
-                applicationFacade.startup( $('body'));
+                facade.startup($("body"));
             });
     });
 });

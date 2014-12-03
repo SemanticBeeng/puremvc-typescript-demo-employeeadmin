@@ -36,7 +36,7 @@ export class UserFormMediator
      */
     constructor(name:string, viewComponent:userFormRef.UserForm) {
         super(name, viewComponent);
-
+        super.initializeNotifier("aa");
         this.registerListeners();
         this.userProxy = <userProxyRef.UserProxy> /*</>*/ this.facade.retrieveProxy(proxyNamesRef.ProxyNames.USER_PROXY);
     }

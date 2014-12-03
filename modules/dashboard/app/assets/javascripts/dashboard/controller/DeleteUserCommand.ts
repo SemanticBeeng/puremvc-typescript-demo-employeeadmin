@@ -26,6 +26,7 @@ export class DeleteUserCommand
      */
     execute(note:puremvc.INotification):void {
         var user:userVOReference.UserVO = note.getBody();
+        debugger;
         var userProxy:userProxyRef.UserProxy = <userProxyRef.UserProxy> /*</>*/ this.facade.retrieveProxy(proxyNamesRef.ProxyNames.USER_PROXY);
         var roleProxy:roleProxyRef.RoleProxy = <roleProxyRef.RoleProxy> /*</>*/ this.facade.retrieveProxy(proxyNamesRef.ProxyNames.ROLE_PROXY);
 

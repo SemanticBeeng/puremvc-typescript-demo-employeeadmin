@@ -22,7 +22,14 @@ export class ApplicationFacade
      * @param app
      *        The HTML root node element of the application.
      */
-    startup(app:JQuery) {
+    private a:string = "dd";
+    constructor(key:string){
+        debugger;
+        this.multitonKey = key;
+        super.initializeFacade();
+    }
+
+    startup(app:JQuery):void {
         debugger;
         this.sendNotification(refToNotifications.NotificationNames.STARTUP, app);
     }
@@ -52,10 +59,12 @@ export class ApplicationFacade
      * @return
      *        The <code>Facade</code> subclass instance used throughout the application.
      */
-    static getInstance():ApplicationFacade {
-        if (!puremvc.Facade.instance)
-            puremvc.Facade.instance = new ApplicationFacade();
+    static getInstance( key:string ):puremvc.IFacade
+    {
+        debugger;
+        if( !puremvc.Facade.instanceMap[ key ] )
+            puremvc.Facade.instanceMap[ key ] = new ApplicationFacade( key );
 
-        return <ApplicationFacade> /*</>*/puremvc.Facade.instance;
+        return puremvc.Facade.instanceMap[ key ];
     }
 }
