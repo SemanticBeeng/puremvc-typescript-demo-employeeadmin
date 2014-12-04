@@ -2,39 +2,55 @@ package controllers.customerMgmt
 
 import controllers.common.RenderMultipleFormats
 import model.customerMgmt.Customer
+import play.api.libs.functional.syntax._
 import play.api.libs.json._
 import play.api.mvc._
 
 object Customers extends RenderMultipleFormats[Customer] {
 
-//  val form = Form(
+  def someCustomers : List[Customer] = {
+
+    List(Customer("Joe", "Smith"), Customer("Oliver", "Twist"))
+  }
+
+
+  //  val form = Form(
 //    mapping(
 //      "id" -> ignored(NotAssigned: Pk[Int]),
 //      "username" -> nonEmptyText,
 //      "age" -> number)(User.apply)(User.unapply))
 //
-//  def list = Action { implicit request =>
-//    render {
-//      case Accepts.Html() => Ok(views.html.users.list(User.list))
-//      case Accepts.Json() => Ok(Json.toJson(User.list))
+  def list = Action { implicit request =>
+    render {
+      //case Accepts.Html() => Ok(views.html.users.list(User.list))
+      case Accepts.Json() => Ok(Json.toJson(someCustomers))
+    }
+  }
+
+//  implicit val customerrites = new Writes[Customer] {
+//    def writes(customer: Customer) = {
+//      Json.obj(
+//        "firstName" -> JsString(customer.firstName),
+//        "lastName" -> JsString(customer.lastName))
+//    }
+//  }
+//
+//  val extendedCustomerWrites = new Writes[Customer] {
+//    def writes(customer: Customer) = {
+//      customerrites.writes(customer) /*+ ("contacts" -> Writes.seq(contactWrites).writes(user.contacts))*/
 //    }
 //  }
 
-  implicit val customerrites = new Writes[Customer] {
-    def writes(customer: Customer) = {
-      Json.obj(
-        "firstName" -> JsString(customer.firstName),
-        "lastName" -> JsString(customer.lastName))
-    }
-  }
-  
-  val extendedCustomerWrites = new Writes[Customer] {
-    def writes(customer: Customer) = {
-      customerrites.writes(customer) /*+ ("contacts" -> Writes.seq(contactWrites).writes(user.contacts))*/
-    }
+  implicit val customerWrite = {
+    import play.api.libs.json.Writes.path._
+    (
+      at[String](__ \ "firstName") and
+        at[String](__ \ "lastName")
+      )(unlift(Customer.unapply))
   }
 
-//  val contactWrites = new Writes[Contact] {
+
+  //  val contactWrites = new Writes[Contact] {
 //    def writes(contact: Contact) = {
 //      Json.obj(
 //        "id" -> JsNumber(contact.id.get),
