@@ -151,7 +151,6 @@ export class UserFormMediator
                 userForm.setUser(note.getBody());
                 userForm.setMode(userFormRef.UserForm.MODE_ADD);
                 userForm.setEnabled(true);
-                userForm.setFocus();
                 break;
 
             case notificationNamesRef.NotificationNames.USER_DELETED:
@@ -167,7 +166,6 @@ export class UserFormMediator
 
                 userForm.setMode(userFormRef.UserForm.MODE_EDIT);
                 userForm.setEnabled(true);
-                userForm.setFocus();
                 break;
         }
     }

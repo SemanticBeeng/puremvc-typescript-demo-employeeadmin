@@ -1,12 +1,13 @@
 ///<reference path='../../../../../../../common/app/assets/javascripts/common/typings/puremvc/puremvc-typescript-standard-1.0.d.ts'/>
 ///<reference path='../../../../../../../common/app/assets/javascripts/common/typings/jquery/jqueryui.d.ts'/>
-
+///<reference path='../../../../../../../common/app/assets/javascripts/common/typings/knockout/knockout.d.ts'/>
 ///<reference path='../../model/vo/UserVO.ts'/>
 ///<reference path='UiComponent.ts'/>
 
 /**
  * The UI component in charge of the <em>User List</em>.
  */
+import ko = require('knockout');
 import uiComponentRef = require('./UiComponent');
 import userVOReference = require('./../../model/vo/UserVO');
 import roleVOReference = require('./../../model/vo/RoleVO');
@@ -22,35 +23,13 @@ export class UserList
 		 */
 		private userListPanel:JQuery = null;
 
-		/**
-		 * The user list HTML element.
-		 */
-		private userList:JQuery = null;
+		private selectedUser:KnockoutObservable<string> = ko.observable("");
 
-		/**
-		 * The "new" button HTML element.
-		 */
-		private newButton:JQuery = null;
+		public users:KnockoutObservableArray<userVOReference.UserVO> = ko.observableArray([]);
 
-		/**
-		 * The "delete" button HTML element.
-		 */
-		private deleteButton:JQuery = null;
+		public usersTotal:KnockoutObservable<number> = ko.observable(0);
 
-		/**
-		 * The current selected user.
-		 */
-		private selectedUser:string = null;
-
-		/**
-		 * The user total HTML element.
-		 */
-		private userTotal:JQuery = null;
-
-		/**
-		 * The user list of the application.
-		 */
-		private users:userVOReference.UserVO[] = null;
+		public isDeleteButtonEnabled:KnockoutObservable<boolean> = ko.observable(false);
 
 		/**
 		 * Constructs a <code>UserList</code> instance.
@@ -58,70 +37,37 @@ export class UserList
 		 * @param view
 		 * 		The jQuery element giving access to the corresponding UI HTML element in the page.
 		 */
-		constructor( view:JQuery )
-		{
+		constructor() {
 			super();
 
-			this.userListPanel = view;
+			$.ajax({
+				context: this,
+				type: "GET",
+				url: "assets/tmpl/userList.html",
+				success: this.templateLoaded,
+				error: null,
+				complete: null
+			});
+		}
 
-			this.initializeChildren();
-			this.bindListeners();
+		private templateLoaded(data):void {
+			debugger;
+
+			var x = $.parseHTML(data);
+			$('#listPanelWrapper').append(x);
+
+			this.userListPanel = $('.user-list-panel');
+
+			ko.applyBindings(this,document.getElementById("userListPanel"));
 		}
 
 		/**
 		 * Initialize references to DOM elements using jQuery.
 		 */
-		private initializeChildren():void
-		{
-			this.userList = this.userListPanel.find(".user-list");
-			this.userTotal = this.userListPanel.find(".user-total");
-
-			this.userList.jqGrid
-			(
-				{
-					datatype: "local",
-					width: 630,
-					height: 160,
-					colNames:["User Name", "First Name", "Last Name", "Email", "Department"],
-					colModel:
-					[
-						{name:"uname", index:"uname", width:125 },
-						{name:"fname", index:"fname", width:125 },
-						{name:"lname", index:"lname", width:125 },
-						{name:"email", index:"email", width:130 },
-						{name:"department", index:"department", width:125}
-					]
-				}
-			);
-
-			this.newButton = this.userListPanel.find(".new-button").button();
-			this.deleteButton = this.userListPanel.find(".delete-button").button();
-			this.deleteButton.button("disable");
-		}
 
 		/**
 		 * Bind events to their listeners.
 		 */
-		private bindListeners():void
-		{
-			//jQuery will be able to only remove events attached under this namespace
-			var namespace:string = ".UserList";
-			this.userList.jqGrid( "setGridParam", { onSelectRow: jQuery.proxy( this, "userList_selectHandler" ) } );
-			this.newButton.on( "click"+namespace, jQuery.proxy( this, "newButton_clickHandler" ) );
-			this.deleteButton.on( "click"+namespace, jQuery.proxy( this, "deleteButton_clickHandler" ) );
-		}
-
-		/**
-		 * Unbind events from their listeners.
-		 */
-		private unbindListeners():void
-		{
-			//jQuery will only remove events attached under this namespace
-			var namespace:string = ".UserList";
-			this.userList.jqGrid( "setGridParam", { onSelectRow: null } );
-			this.newButton.off( "click"+namespace );
-			this.deleteButton.off( "click"+namespace );
-		}
 
 		/**
 		 * Remove any references used by the component to help garbage collection.
@@ -129,8 +75,6 @@ export class UserList
 		destroy():void
 		{
 			super.destroy();
-
-			this.unbindListeners();
 		}
 
 		/**
@@ -141,28 +85,9 @@ export class UserList
 		 */
 		setUsers( userList ):void
 		{
-			this.users = userList;
+			this.users.push.apply(this.users, userList);
 
-			this.userTotal.text(userList.length);
-
-			// First clear all
-			this.userList.jqGrid( "clearGridData" );
-
-			// Fill the data-grid
-			for(var i:number=0; i<userList.length; i++)
-			{
-				var user:userVOReference.UserVO = userList[i];
-				var rowData:any =
-				{
-					uname: user.uname,
-					fname: user.fname,
-					lname: user.lname,
-					email: user.email,
-					department: user.department.value
-				}
-
-				this.userList.jqGrid( "addRowData", i+1, rowData );
-			}
+			this.usersTotal(userList.length);
 		}
 
 		/**
@@ -176,7 +101,7 @@ export class UserList
 		 */
 		getSelectedUser():string
 		{
-			return this.selectedUser;
+			return this.selectedUser();
 		}
 
 		/**
@@ -184,10 +109,9 @@ export class UserList
 		 */
 		deSelect():void
 		{
-			this.userList.jqGrid( "resetSelection" );
 			this.selectedUser = null;
 
-			this.deleteButton.button("disable");
+			this.isDeleteButtonEnabled(false);
 		}
 
 		/**
@@ -196,31 +120,18 @@ export class UserList
 		 * @param id
 		 * 		The id of the selected row.
 		 */
-		private userList_selectHandler( id:string ):void
+		public userList_selectHandler( user:userVOReference.UserVO, parent:UserList ):void
 		{
-			var rowData:any = this.userList.jqGrid( "getRowData", id );
+			parent.selectedUser(user.uname());
+			parent.dispatchEvent( UserList.SELECT );
 
-			var uname:string;
-			for( var i:number=0; i<this.users.length; i++ )
-			{
-				var userVO:userVOReference.UserVO = this.users[i];
-				if( userVO.uname === rowData.uname )
-				{
-					uname = rowData.uname;
-					break;
-				}
-			}
-
-			this.selectedUser = uname;
-			this.dispatchEvent( UserList.SELECT );
-
-			this.deleteButton.button("enable");
+			parent.isDeleteButtonEnabled(true);
 		}
 
 		/**
 		 * New button click event listener.
 		 */
-		private newButton_clickHandler():void
+		public newButton_clickHandler():void
 		{
 			this.deSelect();
 			this.dispatchEvent( UserList.NEW );
