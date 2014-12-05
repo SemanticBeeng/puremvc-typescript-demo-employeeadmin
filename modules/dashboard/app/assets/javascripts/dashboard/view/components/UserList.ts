@@ -51,7 +51,6 @@ export class UserList
 		}
 
 		private templateLoaded(data):void {
-			debugger;
 
 			var x = $.parseHTML(data);
 			$('#listPanelWrapper').append(x);

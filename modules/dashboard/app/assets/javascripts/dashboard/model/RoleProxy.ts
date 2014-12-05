@@ -23,7 +23,6 @@ export class RoleProxy
      *        The role list.
      */
     getRoles():roleVOReference.RoleVO[] {
-        debugger;
         return <roleVOReference.RoleVO[]>/*</>*/ this.data;
     }
 
@@ -69,11 +68,11 @@ export class RoleProxy
         var roles:roleVOReference.RoleVO[] = this.getRoles();
         var hasRole:boolean = false;
         for (var i:number = 0; i < roles.length; i++) {
-            if (roles[i].Uname() === user.uname) {
+            if (roles[i].Uname() === user.uname()) {
                 var userRoles:roleModelVOReference.RoleModelVO[] = roles[i].Roles();
                 for (var j:number = 0; j < userRoles.length; j++) {
                     var roleEnum:roleModelVOReference.RoleModelVO = userRoles[j];
-                    if (roleEnum.Name().equals(role.Name())) {
+                    if (roleEnum.Name() == role.Name()) {
                         hasRole = true;
                         break;
                     }
@@ -98,7 +97,7 @@ export class RoleProxy
         var result:boolean = false;
         if (!this.doesUserHaveRole(user, role)) {
             for (var i:number = 0; i < roles.length; i++) {
-                if (roles[i].Uname() == user.uname) {
+                if (roles[i].Uname() == user.uname()) {
                     var userRoles:roleModelVOReference.RoleModelVO[] = roles[i].Roles();
                     userRoles.push(role);
                     result = true;
@@ -121,11 +120,11 @@ export class RoleProxy
         var roles:roleVOReference.RoleVO[] = this.getRoles();
         if (this.doesUserHaveRole(user, role)) {
             for (var i:number = 0; i < roles.length; i++) {
-                if (roles[i].Uname() === user.uname) {
+                if (roles[i].Uname() === user.uname()) {
                     var userRoles:roleModelVOReference.RoleModelVO[] = roles[i].Roles();
                     for (var j:number = 0; j < userRoles.length; j++) {
                         var roleEnum:roleModelVOReference.RoleModelVO = userRoles[j];
-                        if (roleEnum.Name().equals(role.Name())) {
+                        if (roleEnum.Name() == role.Name()) {
                             userRoles.splice(j, 1);
                             break;
                         }
@@ -146,7 +145,6 @@ export class RoleProxy
      *        The user's role list.
      */
     getUserRoles(uname:string):roleModelVOReference.RoleModelVO[] {
-        debugger;
         var roles:roleVOReference.RoleVO[] = this.getRoles();
         var userRoles:roleModelVOReference.RoleModelVO[] = [];
         for (var i:number = 0; i < roles.length; i++) {

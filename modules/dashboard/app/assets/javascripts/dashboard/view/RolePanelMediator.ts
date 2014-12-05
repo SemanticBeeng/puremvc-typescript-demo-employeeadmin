@@ -115,11 +115,8 @@ export class RolePanelMediator
      * Force the user role list to update its display.
      */
     private updateUserRoleList():void {
-        debugger;
         var user:userVOReference.UserVO = this.getRolePanel().User();
-
-        debugger;
-        var userRoles:roleModelVOReference.RoleModelVO[] = this.roleProxy.getUserRoles(user.uname);
+        var userRoles:roleModelVOReference.RoleModelVO[] = this.roleProxy.getUserRoles(user.uname());
         this.getRolePanel().setUserRoles(userRoles);
     }
 
@@ -155,7 +152,7 @@ export class RolePanelMediator
                 rolePanel.User(<userVOReference.UserVO> /*</>*/ note.getBody());
 
                 var roleVO:roleVOReference.RoleVO = new roleVOReference.RoleVO();
-                roleVO.Uname(rolePanel.User().uname);
+                roleVO.Uname(rolePanel.User().uname());
 
                 this.roleProxy.addItem(roleVO);
                 rolePanel.clearForm();
@@ -178,8 +175,6 @@ export class RolePanelMediator
                 break;
 
             case notificationNamesRef.NotificationNames.USER_SELECTED:
-                debugger;
-
                 rolePanel.clearForm();
                 rolePanel.User(<userVOReference.UserVO> /*</>*/ note.getBody());
                 this.updateUserRoleList();

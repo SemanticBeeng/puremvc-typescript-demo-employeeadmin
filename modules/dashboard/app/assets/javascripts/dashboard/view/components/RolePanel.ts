@@ -26,7 +26,7 @@ export class RolePanel
      */
     public User:KnockoutObservable<userVOReference.UserVO> = ko.observable(null);
 
-    public UserName:KnockoutComputed<string> = '';
+    public UserName:KnockoutComputed<string> = null;
 
     /**
      * The user roles list.
@@ -50,7 +50,7 @@ export class RolePanel
 
     public CanAdd: KnockoutComputed<boolean>;
 
-    public CanRemove: KnockoutComputed<boolean>;
+    public CanRemove: KnockoutObservable<boolean> = ko.observable(false);
 
     /**
      * Constructs a <code>RolePanel</code> instance.
@@ -64,50 +64,59 @@ export class RolePanel
         var self = this;
 
         this.UserName = ko.computed(function(){
-            if(self.User() != null) return self.User().fname + " " self.User().lname;
+            if(self.User() != null) return self.User().fname() + " " + self.User().lname();
             else return '';
         });
 
         this.SelectedRole = ko.computed(function(){
-            debugger;
             if(self.UserRoles() != null)
             {
-                var x:roleModelVOReference.RoleModelVO = ko.utils.arrayFirst(self.UserRoles(), function(each:roleModelVOReference.RoleModelVO)){
+                var x:roleModelVOReference.RoleModelVO = ko.utils.arrayFirst(self.UserRoles(), function(each:roleModelVOReference.RoleModelVO){
                     if(each.IsSelected()) return each;
                 });
+                if(x != null) self.CanRemove(true);
                 return x;
             }
             else return null;
         });
 
         this.RolesCollection = ko.computed(function(){
+            var values = [];
             var roleEnumList:roleEnumReference.RoleEnum[] = roleEnumReference.RoleEnum.getComboList();
-            return roleEnumList;
+            for(var i in roleEnumList)
+            {
+                values.push(roleEnumList[i].value);
+            }
+            return values;
         });
 
         this.CanAdd = ko.computed(function(){
-            debugger;
-            if(self.SelectedRoleToAdd() == null) return false;
+            if(self.SelectedRoleToAdd() == null || self.SelectedRoleToAdd() == roleEnumReference.RoleEnum.NONE_SELECTED.value) return false;
             else {
+                if(self.UserRoles() == null || self.UserRoles().length == 0) return false;
+
                 var alreadyInList:boolean = false;
                 for (var i:number = 0; i < self.UserRoles().length; i++) {
                     var role:roleModelVOReference.RoleModelVO = self.UserRoles()[i];
-                    if (role.Name().equals(self.SelectedRoleToAdd())) {
+                    if (role.Name() == self.SelectedRoleToAdd()) {
                         alreadyInList = true;
                         break;
                     }
                 }
-
-                if (self.SelectedRoleToAdd() == roleEnumReference.RoleEnum.NONE_SELECTED || alreadyInList)
+                if(alreadyInList)
+                {
+                    self.CanRemove(true);
                     return false;
+                }
                 else
+                {
+                    self.CanRemove(false);
+                    ko.utils.arrayForEach(self.UserRoles(), function(each){
+                        each.IsSelected(false);
+                    });
                     return true;
+                }
             }
-        });
-
-        this.CanRemove = ko.computed(function() {
-            debugger;
-            return self.SelectedRole() != null ? true : false;
         });
 
         $.ajax({
@@ -121,12 +130,10 @@ export class RolePanel
     }
 
     private templateLoaded(data):void {
-        debugger;
-
         var x = $.parseHTML(data);
         $('.application').append(x);
 
-        ko.applyBindings(this, document.getElementById('role-panel'));
+        ko.applyBindings(this, document.getElementById('rolePanel'));
     }
 
     /**
@@ -136,22 +143,20 @@ export class RolePanel
      *        The role list associated to the currently selected user.
      */
     setUserRoles(userRoles:roleModelVOReference.RoleModelVO[]):void {
-        debugger;
         if (!userRoles)
             return;
-        this.UserRoles.removeAll();
+
+        this.UserRoles([]);
         var aux = ko.utils.arrayMap(userRoles, function (each) {
             return each;
         });
 
         this.UserRoles.push.apply(this.UserRoles, aux);
-
-        debugger;
     }
 
     selectRole(role:roleModelVOReference.RoleModelVO):void{
-        debugger;
-        ko.utils.arrayForEach(this.UserRoles(), function(each){
+        var x = ko.dataFor(document.getElementById('rolePanel'))
+        ko.utils.arrayForEach(x.UserRoles(), function(each){
             each.IsSelected(false);
         });
         role.IsSelected(true);
@@ -167,6 +172,7 @@ export class RolePanel
     }
 
     reset():void {
+        debugger;
         this.SelectedRoleToAdd(null);
         ko.utils.arrayForEach(this.UserRoles(), function(each){
             each.IsSelected(false);
@@ -184,7 +190,6 @@ export class RolePanel
      * Add button onclick event listener.
      */
     private addRoleButton_clickHandler():void {
-        debugger;
         this.dispatchEvent(RolePanel.ADD);
     }
 

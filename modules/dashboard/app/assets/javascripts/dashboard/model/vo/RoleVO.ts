@@ -27,7 +27,7 @@ export class RoleVO {
             this.Uname(data.uname);
             for (var i in data.roles) {
                 var roleModel = new roleModelReference.RoleModelVO();
-                roleModel.Name(data.roles[i]);
+                roleModel.Name(data.roles[i].value);
                 this.Roles.push(roleModel);
             }
         }
