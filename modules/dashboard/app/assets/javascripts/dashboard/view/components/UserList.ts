@@ -109,7 +109,7 @@ export class UserList
 		 */
 		deSelect():void
 		{
-			this.selectedUser = null;
+			this.selectedUser('');
 
 			this.isDeleteButtonEnabled(false);
 		}

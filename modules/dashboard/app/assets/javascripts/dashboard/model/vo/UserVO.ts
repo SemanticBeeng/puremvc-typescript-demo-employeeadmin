@@ -53,6 +53,7 @@ export class UserVO {
             &&
             this.department() != deptEnumReference.DeptEnum.NONE_SELECTED
             ;
+
     }
 
     /**

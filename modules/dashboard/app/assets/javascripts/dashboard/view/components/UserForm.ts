@@ -116,6 +116,7 @@ export class UserForm
      */
     clearForm():void {
         this.user(new userVOReference.UserVO());
+        this.confirm('');
         this.fillList([]);
     }
 
@@ -161,6 +162,15 @@ export class UserForm
      * Submit the add or update.
      */
     private submitButton_clickHandler():void {
+        var newDepartment = null;
+        for(var i in this.departments()){
+            if(this.departments()[i].ordinal == this.user().departmentId()){
+                newDepartment = this.departments()[i];
+                break;
+            }
+        }
+        this.user().department(newDepartment);
+        debugger;
         if (this.getErrors())
             return;
 
@@ -204,7 +214,7 @@ export class UserForm
             else
                 this.setFieldError("confirm", false);
 
-            if (this.user().department().ordinal = deptEnumReference.DeptEnum.NONE_SELECTED.ordinal)
+            if (this.user().department().ordinal == deptEnumReference.DeptEnum.NONE_SELECTED.ordinal)
                 this.setFieldError("department", error = true);
             else
                 this.setFieldError("department", false);
