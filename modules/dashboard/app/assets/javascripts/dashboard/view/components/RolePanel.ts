@@ -93,7 +93,7 @@ export class RolePanel
         this.CanAdd = ko.computed(function(){
             if(self.SelectedRoleToAdd() == null || self.SelectedRoleToAdd() == roleEnumReference.RoleEnum.NONE_SELECTED.value) return false;
             else {
-                if(self.UserRoles() == null || self.UserRoles().length == 0) return false;
+                if(self.UserRoles() == null || self.User() == null) return false;
 
                 var alreadyInList:boolean = false;
                 for (var i:number = 0; i < self.UserRoles().length; i++) {
@@ -156,7 +156,7 @@ export class RolePanel
 
     selectRole(role:roleModelVOReference.RoleModelVO):void{
         var x = ko.dataFor(document.getElementById('rolePanel'))
-        ko.utils.arrayForEach(x.UserRoles(), function(each){
+        ko.utils.arrayForEach(x.UserRoles(), function(each:roleModelVOReference.RoleModelVO){
             each.IsSelected(false);
         });
         role.IsSelected(true);
