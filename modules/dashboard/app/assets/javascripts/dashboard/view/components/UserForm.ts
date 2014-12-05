@@ -102,6 +102,9 @@ export class UserForm
             this.clearForm();
         else {
             this.fillList(deptEnumReference.DeptEnum.getComboList());
+            if(this.user().department()!=null){
+                this.user().departmentId(this.user().department().ordinal);
+            }
             this.confirm(this.user().password());
         }
     }
