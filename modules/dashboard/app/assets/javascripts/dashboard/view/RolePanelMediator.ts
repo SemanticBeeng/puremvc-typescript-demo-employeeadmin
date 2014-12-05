@@ -145,6 +145,7 @@ export class RolePanelMediator
             case notificationNamesRef.NotificationNames.NEW_USER:
                 rolePanel.clearForm();
                 rolePanel.reset();
+                //TODO initialize new User, create new roles structure for it using role proxies
                 break;
 
             case notificationNamesRef.NotificationNames.USER_ADDED:
