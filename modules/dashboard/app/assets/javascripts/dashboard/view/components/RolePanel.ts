@@ -172,11 +172,11 @@ export class RolePanel
     }
 
     reset():void {
-        debugger;
         this.SelectedRoleToAdd(null);
-        ko.utils.arrayForEach(this.UserRoles(), function(each){
-            each.IsSelected(false);
-        });
+        if (this.UserRoles() != null && this.UserRoles().length > 0)
+            ko.utils.arrayForEach(this.UserRoles(), function (each) {
+                each.IsSelected(false);
+            });
     }
 
     /**
