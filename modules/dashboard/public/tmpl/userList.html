@@ -2,23 +2,42 @@
 <!-- ================================== User List ================================== -->
 <!-- =============================================================================== -->
 
-<div class="user-list-panel">
+<div class="user-list-panel" id="userListPanel">
     <div class="panel-title">Users</div>
     <div class="user-total"></div>
 
     <div class="user-list-panel-content">
 
         <!-- User List DataGrid -->
-        <table id="user-list" class="user-list"></table>
+        <table id="user-list" class="user-list" >
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: users()">
+                <tr data-bind="click:function(data,event){ $parent.userList_selectHandler($data,$parent)}">
+                    <td data-bind="text:uname"></td>
+                    <td data-bind="text:fname"></td>
+                    <td data-bind="text:lname"></td>
+                    <td data-bind="text:email"></td>
+                    <td data-bind="text:department().value"></td>
+                </tr>
+            </tbody>
+        </table>
 
         <!-- User List Controls -->
         <div class="control-bar">
 
             <!-- Update/Add User Button -->
-            <button class="new-button">Add</button>
+            <button class="new-button" data-bind="click:newButton_clickHandler">Add</button>
 
             <!-- Delete User Button -->
-            <button class="delete-button">Delete</button>
+            <button class="delete-button" data-bind="click:deleteButton_clickHandler">Delete</button>
 
         </div>
 

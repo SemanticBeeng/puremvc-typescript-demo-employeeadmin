@@ -39,7 +39,7 @@ export class UserProxy
     getUser(uname:string):userVOReference.UserVO {
         var users:userVOReference.UserVO[] = this.getUsers();
         for (var i:number = 0; i < users.length; i++)
-            if (users[i].uname === uname)
+            if (users[i].uname() === uname)
                 return users[i];
 
         return null;
@@ -54,7 +54,7 @@ export class UserProxy
     updateItem(user:userVOReference.UserVO):void {
         var users:userVOReference.UserVO[] = this.getUsers();
         for (var i:number = 0; i < users.length; i++)
-            if (users[i].uname === user.uname)
+            if (users[i].uname() === user.uname())
                 users[i] = user;
     }
 
@@ -67,7 +67,7 @@ export class UserProxy
     deleteItem(uname:string):void {
         var users:userVOReference.UserVO[] = this.getUsers();
         for (var i:number = 0; i < users.length; i++)
-            if (users[i].uname === uname)
+            if (users[i].uname() === uname)
                 users.splice(i, 1);
     }
 }

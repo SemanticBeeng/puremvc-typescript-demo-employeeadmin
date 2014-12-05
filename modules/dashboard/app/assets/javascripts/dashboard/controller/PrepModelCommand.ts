@@ -51,32 +51,37 @@ export class PrepModelCommand
         var user:userVOReference.UserVO;
         var users:userVOReference.UserVO[] = [];
 
-        user = new userVOReference.UserVO();
-        user.uname = "lstooge";
-        user.fname = "Larry";
-        user.lname = "StoogeX";
-        user.email = "larry@stooges.com";
-        user.password = "ijk456";
-        user.department = deptEnumReference.DeptEnum.ACCT;
-        users.push(user);
+        var userJs = [{
+            uname :"lstooge",
+            fname : "Larry",
+            lname : "StoogeX",
+            email : "larry@stooges.com",
+            password : "ijk456",
+            department : deptEnumReference.DeptEnum.ACCT
+        },
+            {
+                uname :"cstooge",
+                fname : "Curly",
+                lname : "Stooge",
+                email : "curly@stooges.com",
+                password : "xyz987",
+                department : deptEnumReference.DeptEnum.SALES
+            },
+            {
+                uname :"mstooge",
+                fname : "Moe",
+                lname : "Stooge",
+                email : "moe@stooges.com",
+                password : "abc123",
+                department : deptEnumReference.DeptEnum.PLANT
+            },
+        ];
 
-        user = new userVOReference.UserVO();
-        user.uname = "cstooge";
-        user.fname = "Curly";
-        user.lname = "Stooge";
-        user.email = "curly@stooges.com";
-        user.password = "xyz987";
-        user.department = deptEnumReference.DeptEnum.SALES;
-        users.push(user);
-
-        user = new userVOReference.UserVO();
-        user.uname = "mstooge";
-        user.fname = "Moe";
-        user.lname = "Stooge";
-        user.email = "moe@stooges.com";
-        user.password = "abc123";
-        user.department = deptEnumReference.DeptEnum.PLANT;
-        users.push(user);
+        for(var i in userJs){
+            user = new userVOReference.UserVO();
+            user.init(userJs[i]);
+            users.push(user);
+        }
 
         return users;
     }
