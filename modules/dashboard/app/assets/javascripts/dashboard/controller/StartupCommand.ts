@@ -21,7 +21,6 @@ export class StartupCommand
      * preparation of the View (mostly registering Mediators).
      */
     initializeMacroCommand() {
-        debugger;
         this.addSubCommand(modelRef.PrepModelCommand);
         this.addSubCommand(viewRef.PrepViewCommand);
     }

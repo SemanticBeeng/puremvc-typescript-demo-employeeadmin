@@ -61,8 +61,6 @@
 
     //define("knockout", ["webjars!knockout.js"], function(ko) {return ko});
 
-    requirejs(['knockout']);
-
     //define("knockout", ["webjars!knockout.js"], function() {return knockout});
 
     requirejs(['appBoot']);

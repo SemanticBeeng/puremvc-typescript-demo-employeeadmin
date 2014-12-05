@@ -29,7 +29,6 @@ export class PrepViewCommand
      * @override
      */
     execute(note:puremvc.INotification) {
-        debugger;
         var mainView:JQuery = note.getBody();
 
         /*

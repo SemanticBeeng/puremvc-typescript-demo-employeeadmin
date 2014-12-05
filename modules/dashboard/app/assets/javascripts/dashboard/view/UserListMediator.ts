@@ -37,7 +37,6 @@ export class UserListMediator
         super.initializeNotifier("aa");
         this.registerListeners();
 
-        debugger;
         var userProxy:userProxyRef.UserProxy = <userProxyRef.UserProxy> /*</>*/ this.facade.retrieveProxy(proxyNamesRef.ProxyNames.USER_PROXY);
         viewComponent.setUsers(userProxy.getUsers());
     }

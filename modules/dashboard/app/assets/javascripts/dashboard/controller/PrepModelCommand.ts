@@ -30,7 +30,7 @@ export class PrepModelCommand
         /*
          * Data initialization.
          */
-        debugger;
+
         var userProxy:puremvc.IProxy = new userProxyRef.UserProxy(proxyNamesRef.ProxyNames.USER_PROXY, this.generateUsers());
         var roleProxy:puremvc.IProxy = new roleProxyRef.RoleProxy(proxyNamesRef.ProxyNames.ROLE_PROXY, this.generateRoles());
 
@@ -88,23 +88,34 @@ export class PrepModelCommand
      *        The generated dummy roles list.
      */
     generateRoles():roleVOReference.RoleVO[] {
+
         var role:roleVOReference.RoleVO;
         var roles:roleVOReference.RoleVO[] = [];
 
-        role = new roleVOReference.RoleVO();
-        role.uname = "lstooge";
-        role.roles = [ roleEnumReference.RoleEnum.PAYROLL, roleEnumReference.RoleEnum.EMP_BENEFITS    ];
-        roles.push(role);
+        /**
+         * simulates JSON data coming from server
+        */
+        var rolesComingFromServerAsJSON = [
+            {
+                uname: 'lstooge',
+                roles: [roleEnumReference.RoleEnum.PAYROLL, roleEnumReference.RoleEnum.EMP_BENEFITS]
+            },
+            {
+                uname: 'cstooge',
+                roles: [roleEnumReference.RoleEnum.ACCT_PAY, roleEnumReference.RoleEnum.ACCT_RCV, roleEnumReference.RoleEnum.GEN_LEDGER]
+            },
+            {
+                uname: 'mstooge',
+                roles: [roleEnumReference.RoleEnum.INVENTORY, roleEnumReference.RoleEnum.PRODUCTION, roleEnumReference.RoleEnum.SALES, roleEnumReference.RoleEnum.SHIPPING]
+            }
+        ];
 
-        role = new roleVOReference.RoleVO();
-        role.uname = "cstooge";
-        role.roles = [ roleEnumReference.RoleEnum.ACCT_PAY, roleEnumReference.RoleEnum.ACCT_RCV, roleEnumReference.RoleEnum.GEN_LEDGER ];
-        roles.push(role);
-
-        role = new roleVOReference.RoleVO();
-        role.uname = "mstooge";
-        role.roles = [ roleEnumReference.RoleEnum.INVENTORY, roleEnumReference.RoleEnum.PRODUCTION, roleEnumReference.RoleEnum.SALES, roleEnumReference.RoleEnum.SHIPPING ];
-        roles.push(role);
+        for(var i in rolesComingFromServerAsJSON)
+        {
+            role = new roleVOReference.RoleVO();
+            role.init(rolesComingFromServerAsJSON[i]);
+            roles.push(role);
+        }
 
         return roles;
     }

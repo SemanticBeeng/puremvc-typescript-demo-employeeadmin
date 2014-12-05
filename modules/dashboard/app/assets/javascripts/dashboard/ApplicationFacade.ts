@@ -24,13 +24,11 @@ export class ApplicationFacade
      */
     private a:string = "dd";
     constructor(key:string){
-        debugger;
         this.multitonKey = key;
         super.initializeFacade();
     }
 
     startup(app:JQuery):void {
-        debugger;
         this.sendNotification(refToNotifications.NotificationNames.STARTUP, app);
     }
 
@@ -47,7 +45,6 @@ export class ApplicationFacade
      * <code>this.parent()</code> is also required.
      */
     initializeController():void {
-        debugger;
         super.initializeController();
         this.registerCommand(refToNotifications.NotificationNames.STARTUP, refToStartupCommand.StartupCommand);
         this.registerCommand(refToNotifications.NotificationNames.DELETE_USER, refToDeleteCommand.DeleteUserCommand);
@@ -61,7 +58,6 @@ export class ApplicationFacade
      */
     static getInstance( key:string ):puremvc.IFacade
     {
-        debugger;
         if( !puremvc.Facade.instanceMap[ key ] )
             puremvc.Facade.instanceMap[ key ] = new ApplicationFacade( key );
 
