@@ -1,3 +1,4 @@
+/// from here https://github.com/PureMVC/puremvc-typescript-multicore-framework/tree/master/bin
 declare module puremvc
 {
     export interface ICommand
