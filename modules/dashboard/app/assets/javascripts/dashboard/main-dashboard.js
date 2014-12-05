@@ -34,7 +34,7 @@
 
             'jquery.jqGrid-locale': ['./common/lib/jqgrid/js/i18n/grid.locale-en'],
 
-            puremvc: ['./common/lib/puremvc/puremvc-typescript-standard-1.0-min'],
+            puremvc: ['./common/lib/puremvc/puremvc-typescript-standard-1.0'],
 
             appBoot: ['./dashboard/appBoot']
         },
