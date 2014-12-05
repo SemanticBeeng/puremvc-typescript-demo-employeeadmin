@@ -6,29 +6,29 @@
  */
 
 import ko = require('knockout');
-import roleEnumReference = require('./../enum/RoleEnum');
+import roleModelReference = require('./RoleModelVO');
 
 export class RoleVO {
     /**
      * Unique name of the user to whom are associated the roles.
      */
-    public uname:KnockoutObservable<string>;
+    public Uname:KnockoutObservable<string> = ko.observable('');
 
     /**
      * The list of roles associated to the user.
      */
-    public roles:KnockoutObservableArray<roleEnumReference.RoleEnum>;
+    public Roles:KnockoutObservableArray<roleModelReference.RoleModelVO> = ko.observableArray([]);
 
     constructor() {
-        this.uname = ko.observable();
-        this.roles = ko.observableArray();
     }
 
     public init(data):void {
         if (data != null) {
-            this.uname(data.uname);
+            this.Uname(data.uname);
             for (var i in data.roles) {
-                this.roles.push(data.roles[i]);
+                var roleModel = new roleModelReference.RoleModelVO();
+                roleModel.Name(data.roles[i]);
+                this.Roles.push(roleModel);
             }
         }
     }

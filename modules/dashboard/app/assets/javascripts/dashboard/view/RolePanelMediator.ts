@@ -2,6 +2,7 @@
 ///<reference path='../abc/NotificationNames.ts'/>
 ///<reference path='../abc/ProxyNames.ts'/>
 ///<reference path='../model/RoleProxy.ts'/>
+///<reference path='../model/vo/RoleModelVO.ts'/>
 ///<reference path='components/RolePanel.ts'/>
 
 /**
@@ -14,6 +15,7 @@ import notificationNamesRef = require('./../abc/NotificationNames');
 import roleEnumReference = require('./../model/enum/RoleEnum');
 import userVOReference = require('./../model/vo/UserVO');
 import roleVOReference = require('./../model/vo/RoleVO');
+import roleModelVOReference = require('./../model/vo/RoleModelVO');
 
 export class RolePanelMediator
 		extends puremvc.Mediator {
@@ -76,14 +78,17 @@ export class RolePanelMediator
      *        An anonymous object associated to the event dispatched.
      */
     private onAddRole(type:string, properties:any):void {
+        var roleModel = new roleModelVOReference.RoleModelVO();
+        roleModel.Name(this.getRolePanel().SelectedRoleToAdd());
+
         this.roleProxy.addRoleToUser
         (
-            this.getRolePanel().getUser(),
-            this.getRolePanel().getSelectedRole()
+            this.getRolePanel().User(),
+            roleModel
         );
 
         this.updateUserRoleList();
-        this.getRolePanel().setMode(null);
+        this.getRolePanel().reset();
     }
 
     /**
@@ -98,21 +103,23 @@ export class RolePanelMediator
     private onRemoveRole(type:string, properties:any):void {
         this.roleProxy.removeRoleFromUser
         (
-            this.getRolePanel().getUser(),
-            this.getRolePanel().getSelectedRole()
+            this.getRolePanel().User(),
+            this.getRolePanel().SelectedRole()
         );
 
         this.updateUserRoleList();
-        this.getRolePanel().setMode(null);
+        this.getRolePanel().reset();
     }
 
     /**
      * Force the user role list to update its display.
      */
     private updateUserRoleList():void {
-        var user:userVOReference.UserVO = this.getRolePanel().getUser();
+        debugger;
+        var user:userVOReference.UserVO = this.getRolePanel().User();
 
-        var userRoles:roleEnumReference.RoleEnum[] = this.roleProxy.getUserRoles(user.uname);
+        debugger;
+        var userRoles:roleModelVOReference.RoleModelVO[] = this.roleProxy.getUserRoles(user.uname);
         this.getRolePanel().setUserRoles(userRoles);
     }
 
@@ -140,41 +147,41 @@ export class RolePanelMediator
         switch (note.getName()) {
             case notificationNamesRef.NotificationNames.NEW_USER:
                 rolePanel.clearForm();
-                rolePanel.setEnabled(false);
+                rolePanel.reset();
                 break;
 
             case notificationNamesRef.NotificationNames.USER_ADDED:
-                rolePanel.setUser(<userVOReference.UserVO> /*</>*/ note.getBody());
+                debugger;
+                rolePanel.User(<userVOReference.UserVO> /*</>*/ note.getBody());
 
                 var roleVO:roleVOReference.RoleVO = new roleVOReference.RoleVO();
-                roleVO.uname = rolePanel.getUser().uname;
+                roleVO.Uname(rolePanel.User().uname);
 
                 this.roleProxy.addItem(roleVO);
                 rolePanel.clearForm();
-                rolePanel.setEnabled(false);
+                rolePanel.reset();
                 break;
 
             case notificationNamesRef.NotificationNames.USER_UPDATED:
                 rolePanel.clearForm();
-                rolePanel.setEnabled(false);
+                rolePanel.reset();
                 break;
 
             case notificationNamesRef.NotificationNames.USER_DELETED:
                 rolePanel.clearForm();
-                rolePanel.setEnabled(false);
+                rolePanel.reset();
                 break;
 
             case notificationNamesRef.NotificationNames.CANCEL_SELECTED:
                 rolePanel.clearForm();
-                rolePanel.setEnabled(false);
+                rolePanel.reset();
                 break;
 
             case notificationNamesRef.NotificationNames.USER_SELECTED:
-                rolePanel.clearForm();
-                rolePanel.setEnabled(true);
-                rolePanel.setMode(null);
+                debugger;
 
-                rolePanel.setUser(<userVOReference.UserVO> /*</>*/ note.getBody());
+                rolePanel.clearForm();
+                rolePanel.User(<userVOReference.UserVO> /*</>*/ note.getBody());
                 this.updateUserRoleList();
                 break;
 
