@@ -2,16 +2,21 @@
 <!-- ================================== Role List ================================== -->
 <!-- =============================================================================== -->
 
-<div class="role-panel">
+<div id="rolePanel" class="role-panel">
 
     <div class="panel-title">User Roles</div>
-    <div class="selected-fullname"></div>
+    <div class="selected-fullname" data-bind="text: UserName()"></div>
 
     <!-- User Role List -->
     <div class="role-panel-content">
 
         <!-- User Role List DataGrid -->
-        <table id="user-role-list" class="user-role-list"></table>
+        <table class="user-role-list" data-bind="foreach: UserRoles()">
+        <table id="user-role-list" class="user-role-list" data-bind="foreach: UserRoles()">
+            <tr data-bind="click: $parent.selectRole, css:{'isSelected':IsSelected() == true}">
+                <td data-bind="text: Name"></td>
+            </tr>
+        </table>
 
     </div>
 
@@ -19,13 +24,13 @@
     <div class="controlBar">
 
         <!-- Full Role list -->
-        <select class="role-list"><option></option></select>
+        <select class="role-list" data-bind="options: RolesCollection(), value: SelectedRoleToAdd"></select>
 
         <!-- Update/Add User Button -->
-        <button class="add-role-button">Add</button>
+        <button class="add-role-button" data-bind="enable: CanAdd() == true, click: addRoleButton_clickHandler">Add</button>
 
         <!-- Cancel Button -->
-        <button class="remove-role-button">Remove</button>
+        <button class="remove-role-button" data-bind="enable: CanRemove() == true, click: removeRoleButton_clickHandler">Remove</button>
 
     </div>
 

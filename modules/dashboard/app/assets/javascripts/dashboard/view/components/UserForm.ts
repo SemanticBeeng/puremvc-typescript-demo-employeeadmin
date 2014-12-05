@@ -64,8 +64,6 @@ export class UserForm
     }
 
     private templateLoaded(data):void {
-        debugger;
-
         var x = $.parseHTML(data);
         $('.application').append(x);
 

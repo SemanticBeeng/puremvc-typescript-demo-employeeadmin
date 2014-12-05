@@ -4,15 +4,19 @@
 
 ///<reference path='UiComponent.ts'/>
 ///<reference path='../../model/vo/RoleVO.ts'/>
+///<reference path='../../model/vo/RoleModelVO.ts'/>
 ///<reference path='../../model/vo/UserVO.ts'/>
 ///<reference path='../../model/enum/RoleEnum.ts'/>
+///<reference path='../../../../../../../common/app/assets/javascripts/common/typings/knockout/knockout.d.ts'/>
 
 /**
  * The UI component in charge of the <em>role panel</em>.
  */
 
+import ko = require('knockout');
 import uiComponentRef = require('./UiComponent');
 import userVOReference = require('./../../model/vo/UserVO');
+import roleModelVOReference = require('./../../model/vo/RoleModelVO');
 import roleEnumReference = require('./../../model/enum/RoleEnum');
 
 export class RolePanel
@@ -20,52 +24,33 @@ export class RolePanel
     /**
      * Currently selected user.
      */
-    private user:userVOReference.UserVO = null;
+    public User:KnockoutObservable<userVOReference.UserVO> = ko.observable(null);
+
+    public UserName:KnockoutComputed<string> = null;
 
     /**
      * The user roles list.
      */
-    private userRoles:roleEnumReference.RoleEnum[] = null;
+    public UserRoles:KnockoutObservableArray<roleModelVOReference.RoleModelVO> = ko.observableArray([]);
 
     /**
      * Currently selected role.
      */
-    private selectedRole:roleEnumReference.RoleEnum = null;
+    public SelectedRole:KnockoutComputed<roleModelVOReference.RoleModelVO> = null;
 
     /**
-     * The ADD_MODE or REMOVE_MODE role mode.
+     * All roles.
      */
-    private mode:string = null;
+    public RolesCollection:KnockoutComputed<roleEnumReference.RoleEnum[]> = null;
 
     /**
-     * The role panel HTML element.
+     * Currently selected role to add.
      */
-    private rolePanel:JQuery = null;
+    public SelectedRoleToAdd:KnockoutObservable<roleEnumReference.RoleEnum> = ko.observable(null);
 
-    /**
-     * The full role list HTML element.
-     */
-    private roleList:JQuery = null;
+    public CanAdd: KnockoutComputed<boolean>;
 
-    /**
-     * The user role datagrid HTML element.
-     */
-    private userRoleList:JQuery = null;
-
-    /**
-     * The add role button HTML element.
-     */
-    private addRoleButton:JQuery = null;
-
-    /**
-     * The remove role button HTML element.
-     */
-    private removeRoleButton:JQuery = null;
-
-    /**
-     * The selected fullname HTML element.
-     */
-    private selectedFullname:JQuery = null;
+    public CanRemove: KnockoutObservable<boolean> = ko.observable(false);
 
     /**
      * Constructs a <code>RolePanel</code> instance.
@@ -75,6 +60,64 @@ export class RolePanel
      */
     constructor() {
         super();
+
+        var self = this;
+
+        this.UserName = ko.computed(function(){
+            if(self.User() != null) return self.User().fname() + " " + self.User().lname();
+            else return '';
+        });
+
+        this.SelectedRole = ko.computed(function(){
+            if(self.UserRoles() != null)
+            {
+                var x:roleModelVOReference.RoleModelVO = ko.utils.arrayFirst(self.UserRoles(), function(each:roleModelVOReference.RoleModelVO){
+                    if(each.IsSelected()) return each;
+                });
+                if(x != null) self.CanRemove(true);
+                return x;
+            }
+            else return null;
+        });
+
+        this.RolesCollection = ko.computed(function(){
+            var values = [];
+            var roleEnumList:roleEnumReference.RoleEnum[] = roleEnumReference.RoleEnum.getComboList();
+            for(var i in roleEnumList)
+            {
+                values.push(roleEnumList[i].value);
+            }
+            return values;
+        });
+
+        this.CanAdd = ko.computed(function(){
+            if(self.SelectedRoleToAdd() == null || self.SelectedRoleToAdd() == roleEnumReference.RoleEnum.NONE_SELECTED.value) return false;
+            else {
+                if(self.UserRoles() == null || self.UserRoles().length == 0) return false;
+
+                var alreadyInList:boolean = false;
+                for (var i:number = 0; i < self.UserRoles().length; i++) {
+                    var role:roleModelVOReference.RoleModelVO = self.UserRoles()[i];
+                    if (role.Name() == self.SelectedRoleToAdd()) {
+                        alreadyInList = true;
+                        break;
+                    }
+                }
+                if(alreadyInList)
+                {
+                    self.CanRemove(true);
+                    return false;
+                }
+                else
+                {
+                    self.CanRemove(false);
+                    ko.utils.arrayForEach(self.UserRoles(), function(each){
+                        each.IsSelected(false);
+                    });
+                    return true;
+                }
+            }
+        });
 
         $.ajax({
             context: this,
@@ -87,91 +130,10 @@ export class RolePanel
     }
 
     private templateLoaded(data):void {
-        debugger;
-
         var x = $.parseHTML(data);
         $('.application').append(x);
 
-        this.rolePanel = $('.role-panel');
-
-        this.initializeChildren();
-        this.bindListeners();
-
-        this.fillRoleList();
-        this.setEnabled(false);
-    }
-
-    /**
-     * Initialize references to DOM elements using jQuery.
-     */
-    private initializeChildren():void {
-        this.userRoleList = this.rolePanel.find(".user-role-list");
-        this.userRoleList.jqGrid
-        (
-            {
-                datatype: "local",
-                width: 280,
-                height: 170,
-                colNames: ['Roles'],
-                colModel: [
-                    {name: 'value', index: 'value' }
-                ]
-            }
-        );
-
-        this.selectedFullname = this.rolePanel.find(".selected-fullname");
-        this.roleList = this.rolePanel.find(".role-list");
-        this.addRoleButton = this.rolePanel.find(".add-role-button").button();
-        this.removeRoleButton = this.rolePanel.find(".remove-role-button").button();
-    }
-
-    /**
-     * Configure event listeners registration.
-     */
-    private bindListeners():void {
-        //jQuery will be able to only remove events attached under this namespace
-        var namespace:string = ".UserRoleList";
-        this.addRoleButton.on("click" + namespace, jQuery.proxy(this, "addRoleButton_clickHandler"));
-        this.removeRoleButton.on("click" + namespace, jQuery.proxy(this, "removeRoleButton_clickHandler"));
-        this.roleList.on("change" + namespace, jQuery.proxy(this, "roleList_changeHandler"));
-        this.userRoleList.jqGrid("setGridParam", { onSelectRow: jQuery.proxy(this, "userRoleList_changeHandler") });
-    }
-
-    /**
-     * Configure event listeners registration.
-     */
-    private unbindListeners():void {
-        //jQuery will be able to only remove events attached under this namespace
-        var namespace:string = ".UserRoleList";
-        this.addRoleButton.off("click" + namespace);
-        this.removeRoleButton.off("click" + namespace);
-        this.roleList.off("change" + namespace);
-        this.userRoleList.jqGrid("setGridParam", { onSelectRow: null });
-    }
-
-    /**
-     * Add items from <code>RoleEnum</code> to the <code>roleList</code> component.
-     */
-    private fillRoleList():void {
-        var roleEnumList:roleEnumReference.RoleEnum[] = roleEnumReference.RoleEnum.getComboList();
-
-        /*First clear all*/
-        this.roleList.empty();
-
-        var htmlList:string = "";
-        for (var i:number = 0; i < roleEnumList.length; i++) {
-            var role:roleEnumReference.RoleEnum = roleEnumList[i];
-
-            /*
-             * An item not having a value in jQuery will be excluded from the
-             * pop-up menu.
-             */
-            var valueAttr:string = 'value="' + role.ordinal + '"';
-            var selectedAttr:string = i == 0 ? "selected" : "";
-            htmlList += '<option ' + valueAttr + ' ' + selectedAttr + ' >' + role.value + '</option>';
-        }
-
-        this.roleList.html(htmlList);
+        ko.applyBindings(this, document.getElementById('rolePanel'));
     }
 
     /**
@@ -180,110 +142,41 @@ export class RolePanel
      * @param userRoles
      *        The role list associated to the currently selected user.
      */
-    setUserRoles(userRoles:roleEnumReference.RoleEnum[]):void {
-        // First clear all
-        this.userRoleList.jqGrid('clearGridData');
-
+    setUserRoles(userRoles:roleModelVOReference.RoleModelVO[]):void {
         if (!userRoles)
             return;
 
-        this.userRoles = userRoles;
+        this.UserRoles([]);
+        var aux = ko.utils.arrayMap(userRoles, function (each) {
+            return each;
+        });
 
-        // Fill the data-grid
-        for (var i:number = 0; i < userRoles.length; i++) {
-            var role:roleEnumReference.RoleEnum = userRoles[i];
-            this.userRoleList.jqGrid('addRowData', i + 1, role);
-        }
+        this.UserRoles.push.apply(this.UserRoles, aux);
     }
 
-    /**
-     * Get the selected user for whom roles list is displayed.
-     *
-     * @return
-     *        The selected user for whom roles list is displayed.
-     */
-    getUser():userVOReference.UserVO {
-        return this.user;
-    }
-
-    /**
-     * Set the selected user for whom roles list is displayed.
-     *
-     * @param user
-     *        The selected user for whom to display the roles.
-     */
-    setUser(user:userVOReference.UserVO):void {
-        this.user = user;
-
-        this.selectedFullname.text(user.lname + ", " + user.fname);
-    }
-
-    /**
-     * Get the selected role in the remove/add combobox if any.
-     *
-     * @return
-     *        The selected role in the remove/add combobox if any.
-     */
-    getSelectedRole():roleEnumReference.RoleEnum {
-        return this.selectedRole;
-    }
-
-    /**
-     * Enable or disable the form.
-     *
-     * @param isEnabled
-     *        When true enable the form and when false disable it.
-     */
-    setEnabled(isEnabled:boolean):void {
-        if (isEnabled) {
-            this.userRoleList.removeAttr("disabled");
-            this.roleList.removeAttr("disabled");
-            this.addRoleButton.button("enable");
-            this.removeRoleButton.button("enable");
-        }
-        else {
-            this.userRoleList.attr("disabled", "disabled");
-            this.roleList.attr("disabled", "disabled");
-            this.roleList.prop("selectedIndex", 0);
-            this.addRoleButton.button("disable");
-            this.removeRoleButton.button("disable");
-        }
-    }
-
-    /**
-     * Set the panel mode to <code>ADD_MODE</code> or <code>REMOVE_MODE</code>.
-     *
-     * @param mode
-     *        The panel <code>ADD_MODE</code> or <code>REMOVE_MODE</code> mode.
-     */
-    setMode(mode:string):void {
-        switch (mode) {
-            case RolePanel.ADD_MODE:
-                this.addRoleButton.button("enable");
-                this.removeRoleButton.button("disable");
-                break;
-
-            case RolePanel.REMOVE_MODE:
-                this.addRoleButton.button("disable");
-                this.removeRoleButton.button("enable");
-                this.roleList.prop("selectedIndex", 0);
-                break;
-
-            default:
-                this.addRoleButton.button("disable");
-                this.removeRoleButton.button("disable");
-        }
+    selectRole(role:roleModelVOReference.RoleModelVO):void{
+        var x = ko.dataFor(document.getElementById('rolePanel'))
+        ko.utils.arrayForEach(x.UserRoles(), function(each){
+            each.IsSelected(false);
+        });
+        role.IsSelected(true);
     }
 
     /**
      * Clear the panel from all its displayed data.
      */
     clearForm():void {
-        this.user = null;
-        this.setUserRoles(null);
-        this.selectedFullname.text("");
-        this.roleList.prop("selectedIndex", 0);
-        this.userRoleList.jqGrid('resetSelection');
+        this.User(null);
+        this.UserRoles(null);
+        this.SelectedRoleToAdd(null);
+    }
+
+    reset():void {
+        debugger;
+        this.SelectedRoleToAdd(null);
+        ko.utils.arrayForEach(this.UserRoles(), function(each){
+            each.IsSelected(false);
+        });
     }
 
     /**
@@ -291,8 +184,6 @@ export class RolePanel
      */
     destroy():void {
         super.destroy();
-
-        this.unbindListeners();
     }
 
     /**
@@ -307,42 +198,6 @@ export class RolePanel
      */
     private removeRoleButton_clickHandler():void {
         this.dispatchEvent(RolePanel.REMOVE);
-    }
-
-    /**
-     * Select role to remove.
-     *
-     * @param id
-     *        The id of the selected row.
-     */
-    private userRoleList_changeHandler(id:string):void {
-        var index:number = this.userRoleList.jqGrid('getInd', id);
-        this.selectedRole = this.userRoles[index - 1];
-        this.setMode(RolePanel.REMOVE_MODE);
-    }
-
-    /**
-     * Select role to add.
-     */
-    private roleList_changeHandler():void {
-        this.userRoleList.jqGrid('resetSelection');
-
-        var roleEnumList:roleEnumReference.RoleEnum[] = roleEnumReference.RoleEnum.getComboList();
-        this.selectedRole = roleEnumList[this.roleList.prop("selectedIndex")];
-
-        var alreadyInList:boolean = false;
-        for (var i:number = 0; i < this.userRoles.length; i++) {
-            var role:roleEnumReference.RoleEnum = this.userRoles[i];
-            if (role.equals(this.selectedRole)) {
-                alreadyInList = true;
-                break;
-            }
-        }
-
-        if (this.selectedRole == roleEnumReference.RoleEnum.NONE_SELECTED || alreadyInList)
-            this.setMode(null);
-        else
-            this.setMode(RolePanel.ADD_MODE);
     }
 
     /**

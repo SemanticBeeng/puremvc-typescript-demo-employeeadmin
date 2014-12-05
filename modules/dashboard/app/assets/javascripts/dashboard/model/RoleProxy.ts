@@ -2,6 +2,7 @@
 
 ///<reference path='enum/RoleEnum.ts'/>
 ///<reference path='vo/RoleVO.ts'/>
+///<reference path='vo/RoleModelVO.ts'/>
 ///<reference path='vo/UserVO.ts'/>
 
 /**
@@ -10,6 +11,7 @@
 
 import roleVOReference = require('./vo/RoleVO');
 import userVOReference = require('./vo/UserVO');
+import roleModelVOReference = require('./vo/RoleModelVO');
 import roleEnumReference = require('./enum/RoleEnum');
 
 export class RoleProxy
@@ -43,7 +45,7 @@ export class RoleProxy
     deleteItem(uname:string):void {
         var roles:roleVOReference.RoleVO[] = this.getRoles();
         for (var i:number = 0; i < roles.length; i++) {
-            if (roles[i].uname() === uname) {
+            if (roles[i].Uname() === uname) {
                 roles.splice(i, 1);
                 break;
             }
@@ -62,15 +64,15 @@ export class RoleProxy
      * @return
      *        The user has the given role.
      */
-    doesUserHaveRole(user:userVOReference.UserVO, role:roleEnumReference.RoleEnum):boolean {
+    doesUserHaveRole(user:userVOReference.UserVO, role:roleModelVOReference.RoleModelVO):boolean {
         var roles:roleVOReference.RoleVO[] = this.getRoles();
         var hasRole:boolean = false;
         for (var i:number = 0; i < roles.length; i++) {
-            if (roles[i].uname() === user.uname) {
-                var userRoles:roleEnumReference.RoleEnum[] = roles[i].roles();
+            if (roles[i].Uname() === user.uname()) {
+                var userRoles:roleModelVOReference.RoleModelVO[] = roles[i].Roles();
                 for (var j:number = 0; j < userRoles.length; j++) {
-                    var roleEnum:roleEnumReference.RoleEnum = userRoles[j];
-                    if (roleEnum.equals(role)) {
+                    var roleEnum:roleModelVOReference.RoleModelVO = userRoles[j];
+                    if (roleEnum.Name() == role.Name()) {
                         hasRole = true;
                         break;
                     }
@@ -90,13 +92,13 @@ export class RoleProxy
      * @param role
      *        The role to add.
      */
-    addRoleToUser(user:userVOReference.UserVO, role:roleEnumReference.RoleEnum):void {
+    addRoleToUser(user:userVOReference.UserVO, role:roleModelVOReference.RoleModelVO):void {
         var roles:roleVOReference.RoleVO[] = this.getRoles();
         var result:boolean = false;
         if (!this.doesUserHaveRole(user, role)) {
             for (var i:number = 0; i < roles.length; i++) {
-                if (roles[i].uname() == user.uname) {
-                    var userRoles:roleEnumReference.RoleEnum[] = roles[i].roles();
+                if (roles[i].Uname() == user.uname()) {
+                    var userRoles:roleModelVOReference.RoleModelVO[] = roles[i].Roles();
                     userRoles.push(role);
                     result = true;
                     break;
@@ -114,15 +116,15 @@ export class RoleProxy
      * @param role
      *        The role to remove.
      */
-    removeRoleFromUser(user:userVOReference.UserVO, role:roleEnumReference.RoleEnum):void {
+    removeRoleFromUser(user:userVOReference.UserVO, role:roleModelVOReference.RoleModelVO):void {
         var roles:roleVOReference.RoleVO[] = this.getRoles();
         if (this.doesUserHaveRole(user, role)) {
             for (var i:number = 0; i < roles.length; i++) {
-                if (roles[i].uname() === user.uname) {
-                    var userRoles:roleEnumReference.RoleEnum[] = roles[i].roles();
+                if (roles[i].Uname() === user.uname()) {
+                    var userRoles:roleModelVOReference.RoleModelVO[] = roles[i].Roles();
                     for (var j:number = 0; j < userRoles.length; j++) {
-                        var roleEnum:roleEnumReference.RoleEnum = userRoles[j];
-                        if (roleEnum.equals(role)) {
+                        var roleEnum:roleModelVOReference.RoleModelVO = userRoles[j];
+                        if (roleEnum.Name() == role.Name()) {
                             userRoles.splice(j, 1);
                             break;
                         }
@@ -142,12 +144,12 @@ export class RoleProxy
      * @return
      *        The user's role list.
      */
-    getUserRoles(uname:string):roleEnumReference.RoleEnum[] {
+    getUserRoles(uname:string):roleModelVOReference.RoleModelVO[] {
         var roles:roleVOReference.RoleVO[] = this.getRoles();
-        var userRoles:roleEnumReference.RoleEnum[] = [];
+        var userRoles:roleModelVOReference.RoleModelVO[] = [];
         for (var i:number = 0; i < roles.length; i++) {
-            if (roles[i].uname() === uname) {
-                userRoles = roles[i].roles();
+            if (roles[i].Uname() === uname) {
+                userRoles = roles[i].Roles();
                 break;
             }
         }
