@@ -106,6 +106,7 @@ export class UserListMediator
                 break;
 
             case notificationNamesRef.NotificationNames.USER_DELETED:
+                debugger;
                 userList.setUsers(userProxy.getUsers());
                 userList.deSelect();
                 break;
@@ -130,6 +131,7 @@ export class UserListMediator
      *        An anonymous object associated to the event dispatched.
      */
     private onDelete(type:string, properties:any):void {
+        debugger;
         var userList:userListRef.UserList = this.getUserList();
         var uname:string = userList.getSelectedUser();
         var userProxy:userProxyRef.UserProxy = <userProxyRef.UserProxy> /*</>*/ this.facade.retrieveProxy(proxyNamesRef.ProxyNames.USER_PROXY);

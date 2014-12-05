@@ -30,8 +30,8 @@ export class DeleteUserCommand
         var userProxy:userProxyRef.UserProxy = <userProxyRef.UserProxy> /*</>*/ this.facade.retrieveProxy(proxyNamesRef.ProxyNames.USER_PROXY);
         var roleProxy:roleProxyRef.RoleProxy = <roleProxyRef.RoleProxy> /*</>*/ this.facade.retrieveProxy(proxyNamesRef.ProxyNames.ROLE_PROXY);
 
-        userProxy.deleteItem(user.uname);
-        roleProxy.deleteItem(user.uname);
+        userProxy.deleteItem(user.uname());
+        roleProxy.deleteItem(user.uname());
 
         this.sendNotification(notificationNamesRef.NotificationNames.USER_DELETED);
     }

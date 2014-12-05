@@ -65,9 +65,10 @@ export class UserProxy
      *        The name ot the user to remove.
      */
     deleteItem(uname:string):void {
+        debugger;
         var users:userVOReference.UserVO[] = this.getUsers();
         for (var i:number = 0; i < users.length; i++)
-            if (users[i].uname() === uname)
+            if (users[i].uname() == uname)
                 users.splice(i, 1);
     }
 }

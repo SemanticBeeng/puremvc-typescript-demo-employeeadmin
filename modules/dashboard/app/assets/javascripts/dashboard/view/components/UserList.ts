@@ -86,7 +86,6 @@ export class UserList
 		{
 			this.users.removeAll();
 			this.users.push.apply(this.users, userList);
-
 			this.usersTotal(userList.length);
 		}
 
