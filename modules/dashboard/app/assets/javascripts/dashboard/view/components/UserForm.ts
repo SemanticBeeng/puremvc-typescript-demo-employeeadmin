@@ -171,12 +171,11 @@ export class UserForm
             }
         }
         this.user().department(newDepartment);
-        debugger;
+
         if (this.getErrors())
             return;
 
-        var user:userVOReference.UserVO = this.getUser();
-        if (user.getIsValid()) {
+        if (this.getUser().getIsValid()) {
             if (this.mode() == UserForm.MODE_ADD)
                 this.dispatchEvent(UserForm.ADD);
             else
