@@ -26,16 +26,6 @@ export class UserForm extends uiComponentRef.UiComponent {
      */
     private userFormPanel:JQuery = null;
 
-
-    public user:KnockoutObservable<userVOReference.UserVO> = ko.observable(new userVOReference.UserVO());
-
-    /**
-     * The roles list for the selected user.
-     */
-    private userRoles:KnockoutObservableArray<roleVOReference.RoleVO> = ko.observableArray([]);
-
-    private departments:KnockoutObservableArray<deptEnumReference.DeptEnum> = ko.observableArray([]);
-
     /**
      * The MODE_ADD or MODE_EDIT user mode.
      */
@@ -45,9 +35,7 @@ export class UserForm extends uiComponentRef.UiComponent {
 
     private addEditButtonText:KnockoutObservable<string> = ko.observable("Add");
 
-    private confirm:KnockoutObservable<string> = ko.observable("");
-
-    public dataBindingContext:dbc.UserFormDataBindingContext;
+    public dataBindingContext:dbc.UserFormDataBindingContext = new dbc.UserFormDataBindingContext();
 
     public getBindingContext():dbc.UserFormDataBindingContext {
         return this.dataBindingContext;
@@ -78,8 +66,6 @@ export class UserForm extends uiComponentRef.UiComponent {
 
         this.userFormPanel = $('.user-form-panel');
 
-        this.dataBindingContext = new dbc.UserFormDataBindingContext(this.user, this.departments, this.confirm);
-
         /**
          *
          */
@@ -100,7 +86,7 @@ export class UserForm extends uiComponentRef.UiComponent {
      *        content.
      */
     private fillList(deptEnumList:deptEnumReference.DeptEnum[]):void {
-        this.departments.push.apply(this.departments, deptEnumList);
+        this.dataBindingContext.departments.push.apply(this.dataBindingContext.departments, deptEnumList);
     }
 
     /**
@@ -110,29 +96,29 @@ export class UserForm extends uiComponentRef.UiComponent {
      *        The currently selected user.
      */
     setUser(user:userVOReference.UserVO):void {
-        this.user(user);
+        this.dataBindingContext.setUser(user);
 
         if (!user)
             this.clearForm();
         else {
             this.fillList(deptEnumReference.DeptEnum.getComboList());
-            if (this.user().department() != null) {
-                this.user().departmentId(this.user().department().ordinal);
+            if (this.dataBindingContext.user().department() != null) {
+                this.dataBindingContext.user().departmentId(this.dataBindingContext.user().department().ordinal);
             }
-            this.confirm(this.user().password());
+            this.dataBindingContext.confirm(this.dataBindingContext.user().password());
         }
     }
 
-    getUser():userVOReference.UserVO {
-        return this.user();
-    }
+    //getUser():userVOReference.UserVO {
+    //    return this.dataBindingContext.user();
+    //}
 
     /**
      * Clear the whole form.
      */
     clearForm():void {
-        this.user(new userVOReference.UserVO());
-        this.confirm('');
+        this.dataBindingContext.setUser(new userVOReference.UserVO());
+        this.dataBindingContext.confirm('');
         this.fillList([]);
     }
 
@@ -179,18 +165,18 @@ export class UserForm extends uiComponentRef.UiComponent {
      */
     private submitButton_clickHandler():void {
         var newDepartment = null;
-        for (var i in this.departments()) {
-            if (this.departments()[i].ordinal == this.user().departmentId()) {
-                newDepartment = this.departments()[i];
+        for (var i in this.dataBindingContext.departments()) {
+            if (this.dataBindingContext.departments()[i].ordinal == this.dataBindingContext.user().departmentId()) {
+                newDepartment = this.dataBindingContext.departments()[i];
                 break;
             }
         }
-        this.user().department(newDepartment);
+        this.dataBindingContext.user().department(newDepartment);
 
         if (this.getErrors())
             return;
 
-        if (this.getUser().getIsValid()) {
+        if (this.dataBindingContext.user().getIsValid()) {
             if (this.mode() == UserForm.MODE_ADD)
                 this.dispatchEvent(UserForm.ADD);
             else
@@ -213,23 +199,24 @@ export class UserForm extends uiComponentRef.UiComponent {
      */
     private getErrors():boolean {
         var error:boolean = false;
-        if (this.user() != null) {
-            if (this.user().uname() == "")
+        var user = this.dataBindingContext.user();
+        if (user != null) {
+            if (user.uname() == "")
                 this.setFieldError("uname", error = true);
             else
                 this.setFieldError("uname", false);
 
-            if (this.user().password() == "")
+            if (user.password() == "")
                 this.setFieldError("password", error = true);
             else
                 this.setFieldError("password", false);
 
-            if (this.user().password() != "" && this.confirm() != this.user().password())
+            if (user.password() != "" && this.dataBindingContext.confirm() != user.password())
                 this.setFieldError("confirm", error = true);
             else
                 this.setFieldError("confirm", false);
 
-            if (this.user().department().ordinal == deptEnumReference.DeptEnum.NONE_SELECTED.ordinal)
+            if (this.dataBindingContext.user().department().ordinal == deptEnumReference.DeptEnum.NONE_SELECTED.ordinal)
                 this.setFieldError("department", error = true);
             else
                 this.setFieldError("department", false);
@@ -239,7 +226,7 @@ export class UserForm extends uiComponentRef.UiComponent {
              * @see http://stackoverflow.com/questions/7786058/find-the-regex-used-by-html5-forms-for-validation
              */
             var emailReg:RegExp = /^[a-z0-9!#$%&'*+\/=?^_`\{|\}~\.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*$/;
-            if (this.user().email() != "" && !emailReg.test(this.user().email()))
+            if (this.dataBindingContext.user().email() != "" && !emailReg.test(this.dataBindingContext.user().email()))
                 this.setFieldError("email", error = true);
             else
                 this.setFieldError("email", false);
