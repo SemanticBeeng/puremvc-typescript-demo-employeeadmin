@@ -33,4 +33,6 @@ app/modules/*/target
 
 # All sources are TypeScript so we can ignore all *.js*
 **/javascripts/dashboard/**/*.js*
+**/javascripts/webc/**/*.js*
+
 
