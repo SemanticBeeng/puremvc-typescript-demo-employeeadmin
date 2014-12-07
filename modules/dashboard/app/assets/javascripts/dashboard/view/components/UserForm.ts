@@ -6,6 +6,7 @@
 ///<reference path='../../model/vo/RoleVO.ts'/>
 ///<reference path='../../model/vo/UserVO.ts'/>
 ///<reference path='UiComponent.ts'/>
+///<reference path='UserFormDataBindingContext.ts'/>
 
 /**
  * The UI component in charge of the <em>user form</em>.
@@ -17,8 +18,9 @@ import roleVOReference = require('./../../model/vo/RoleVO');
 import roleEnumReference = require('./../../model/enum/RoleEnum');
 import deptEnumReference = require('./../../model/enum/DeptEnum');
 
-export class UserForm
-		extends uiComponentRef.UiComponent {
+import dbc = require('./UserFormDataBindingContext');
+
+export class UserForm extends uiComponentRef.UiComponent {
     /**
      * The user form panel HTML element.
      */
@@ -32,18 +34,25 @@ export class UserForm
      */
     private userRoles:KnockoutObservableArray<roleVOReference.RoleVO> = ko.observableArray([]);
 
-    private departments : KnockoutObservableArray<deptEnumReference.DeptEnum> = ko.observableArray([]);
+    private departments:KnockoutObservableArray<deptEnumReference.DeptEnum> = ko.observableArray([]);
 
     /**
      * The MODE_ADD or MODE_EDIT user mode.
      */
     private mode:KnockoutObservable<string> = ko.observable("");
 
-    private isEnabled : KnockoutObservable<boolean> = ko.observable(false);
+    private isEnabled:KnockoutObservable<boolean> = ko.observable(false);
 
-    private addEditButtonText : KnockoutObservable<string> = ko.observable("Add");
+    private addEditButtonText:KnockoutObservable<string> = ko.observable("Add");
 
     private confirm:KnockoutObservable<string> = ko.observable("");
+
+    public dataBindingContext:dbc.UserFormDataBindingContext;
+
+    public getBindingContext():dbc.UserFormDataBindingContext {
+        return this.dataBindingContext;
+    }
+
     /**
      * Constructs a <code>UserForm</code> instance.
      *
@@ -69,7 +78,12 @@ export class UserForm
 
         this.userFormPanel = $('.user-form-panel');
 
-        ko.applyBindings(this,document.getElementById("userFormPanel"));
+        this.dataBindingContext = new dbc.UserFormDataBindingContext(this.user, this.departments, this.confirm);
+
+        /**
+         *
+         */
+        ko.applyBindings({_ : this.dataBindingContext}, document.getElementById("userFormPanel"));
 
         this.setEnabled(false);
     }
@@ -78,7 +92,7 @@ export class UserForm
      * Initialize references to DOM elements using jQuery.
      */
 
-        /**
+    /**
      * Add items from <code>DeptEnum</code> to the corresponding list UI component.
      *
      * @param deptEnumList
@@ -102,7 +116,7 @@ export class UserForm
             this.clearForm();
         else {
             this.fillList(deptEnumReference.DeptEnum.getComboList());
-            if(this.user().department()!=null){
+            if (this.user().department() != null) {
                 this.user().departmentId(this.user().department().ordinal);
             }
             this.confirm(this.user().password());
@@ -112,6 +126,7 @@ export class UserForm
     getUser():userVOReference.UserVO {
         return this.user();
     }
+
     /**
      * Clear the whole form.
      */
@@ -164,8 +179,8 @@ export class UserForm
      */
     private submitButton_clickHandler():void {
         var newDepartment = null;
-        for(var i in this.departments()){
-            if(this.departments()[i].ordinal == this.user().departmentId()){
+        for (var i in this.departments()) {
+            if (this.departments()[i].ordinal == this.user().departmentId()) {
                 newDepartment = this.departments()[i];
                 break;
             }
@@ -198,7 +213,7 @@ export class UserForm
      */
     private getErrors():boolean {
         var error:boolean = false;
-        if(this.user()!=null) {
+        if (this.user() != null) {
             if (this.user().uname() == "")
                 this.setFieldError("uname", error = true);
             else

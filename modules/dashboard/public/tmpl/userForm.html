@@ -5,7 +5,7 @@
 <div class="user-form-panel" id="userFormPanel">
 
     <div class="panel-title">User Profile</div>
-    <div class="selected-uname" data-bind="text: user().uname"></div>
+    <div class="selected-uname" data-bind="text: _.user().uname"></div>
 
     <form action="javascript:void(0);">
 
@@ -14,43 +14,43 @@
             <!-- First Name-->
             <div class="field">
                 <label for="fname">First Name</label>
-                <input id="fname" type="text" class="fname ui-corner-all" data-bind="value: user().fname" />
+                <input id="fname" type="text" class="fname ui-corner-all" data-bind="value: _.user().fname" />
             </div>
 
             <!-- Last Name -->
             <div class="field">
                 <label for="lname">Last Name</label>
-                <input id="lname" type="text" class="lname ui-corner-all" data-bind="value: user().lname" />
+                <input id="lname" type="text" class="lname ui-corner-all" data-bind="value: _.user().lname" />
             </div>
 
             <!-- Email -->
             <div class="field">
                 <label for="email">Email</label>
-                <input type="email" id="email" class="email ui-corner-all" data-bind="value: user().email" />
+                <input type="email" id="email" class="email ui-corner-all" data-bind="value: _.user().email" />
             </div>
 
             <!-- Username -->
             <div class="field">
                 <label for="uname" class="required">Username</label>
-                <input id="uname" type="text" class="uname ui-corner-all" data-bind="value: user().uname" required/>
+                <input id="uname" type="text" class="uname ui-corner-all" data-bind="value: _.user().uname" required/>
             </div>
 
             <!-- Password -->
             <div class="field">
                 <label for="password" class="required">Password</label>
-                <input id="password" type="password" class="password ui-corner-all" data-bind="value: user().password" required />
+                <input id="password" type="password" class="password ui-corner-all" data-bind="value: _.user().password" required />
             </div>
 
             <!-- Confirm Password -->
             <div class="field">
                 <label for="confirm" class="required">Confirm Password</label>
-                <input id="confirm" type="password" class="confirm ui-corner-all" data-bind="value: confirm" required />
+                <input id="confirm" type="password" class="confirm ui-corner-all" data-bind="value: _.confirm" required />
             </div>
 
             <!-- Department Combo -->
             <div class="field">
                 <label for="department" class="required">Department</label>
-                <select id="department" class="department" data-bind="options: departments, optionsText: 'value', optionsValue: 'ordinal', value: user().departmentId"></select>
+                <select id="department" class="department" data-bind="options: _.departments, optionsText: 'value', optionsValue: 'ordinal', value: _.user().departmentId"></select>
             </div>
 
         </div>
@@ -59,10 +59,10 @@
         <div class="controlBar">
 
             <!-- Update/Add User Button -->
-            <button type="submit" class="submit-button" data-bind="click : submitButton_clickHandler">Add User</button>
+            <!--<button type="submit" class="submit-button" data-bind="click : submitButton_clickHandler">Add User</button>-->
 
             <!-- Cancel Button -->
-            <button class="cancel-button" data-bind="click: cancelButton_clickHandler">Cancel</button>
+            <!--<button class="cancel-button" data-bind="click: cancelButton_clickHandler">Cancel</button>-->
 
         </div>
 
